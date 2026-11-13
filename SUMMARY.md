@@ -1,6 +1,18 @@
 # Table of contents
 
 * [Kho Tài Liệu Sống (BA Living Docs)](README.md)
+* [Gắn và hiệu chỉnh đồng hồ nước](gan-va-hieu-chinh-dong-ho-nuoc/README.md)
+  * [00. Tổng quan dự án](gan-va-hieu-chinh-dong-ho-nuoc/00-tong-quan.md)
+  * [01. Tính năng](gan-va-hieu-chinh-dong-ho-nuoc/01-tinh-nang/README.md)
+    * [Tiếp nhận & gắn đồng hồ nước](gan-va-hieu-chinh-dong-ho-nuoc/01-tinh-nang/tiep-nhan-va-gan-dong-ho.md)
+  * [02. Quy tắc dùng chung](gan-va-hieu-chinh-dong-ho-nuoc/02-quy-tac-chung.md)
+  * [03. Nhật ký chốt (Decision Log)](gan-va-hieu-chinh-dong-ho-nuoc/03-nhat-ky-chot.md)
+* [Thay thế đồng hồ nước](thay-the-dong-ho-nuoc/README.md)
+  * [00. Tổng quan dự án](thay-the-dong-ho-nuoc/00-tong-quan.md)
+  * [01. Tính năng](thay-the-dong-ho-nuoc/01-tinh-nang/README.md)
+    * [Lập phiếu & thay thế đồng hồ nước](thay-the-dong-ho-nuoc/01-tinh-nang/lap-phieu-thay-the-dong-ho.md)
+  * [02. Quy tắc dùng chung](thay-the-dong-ho-nuoc/02-quy-tac-chung.md)
+  * [03. Nhật ký chốt (Decision Log)](thay-the-dong-ho-nuoc/03-nhat-ky-chot.md)
 * [du-an-mau](du-an-mau/README.md)
   * [00. Tổng quan dự án](du-an-mau/00-tong-quan.md)
   * [02. Quy tắc dùng chung](du-an-mau/02-quy-tac-chung.md)
