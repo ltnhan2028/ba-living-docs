@@ -35,6 +35,8 @@
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
+Đây là test thứ 2 của Nhàn Lê
+
 ## 5. Lịch sử thay đổi (Version History)
 
 | Phiên bản | Ngày       | Người chốt | Tóm tắt thay đổi                                                                  |
