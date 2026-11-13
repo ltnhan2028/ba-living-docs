@@ -1,6 +1,6 @@
 # Đặt sân nhanh
 
-> **Phiên bản hiện tại:** `v1.1` · **Cập nhật lần cuối:** 2026-11-13 · **Trạng thái:** Đang áp dụng
+> **Phiên bản hiện tại:** `v1.2` · **Cập nhật lần cuối:** 2026-11-13 · **Trạng thái:** Đang áp dụng
 
 ## 1. Mục tiêu & Luồng nghiệp vụ (Flow)
 
@@ -43,3 +43,4 @@
 | --------- | ---------- | ---------- | --------------------------------------------------------------------------------- |
 | `v1.0`    | 2026-11-13 | Lê Nhân    | Khởi tạo đặc tả tính năng Đặt sân nhanh                                           |
 | `v1.1`    | 2026-11-13 | Lê Nhân    | Giảm thời gian giữ chỗ 10→5 phút; bổ sung rule hoàn cọc 100% trước 24h (`DEC-02`) |
+| `v1.2` | 2026-11-13 | Thanh Nhan Le | change request with no subject merged in GitBook (qua GitBook) |
