@@ -1,22 +1,35 @@
 # Table of contents
 
-* [Kho Tài Liệu Sống (BA Living Docs)](README.md)
-* [Gắn và hiệu chỉnh đồng hồ nước](gan-va-hieu-chinh-dong-ho-nuoc/README.md)
-  * [00. Tổng quan dự án](gan-va-hieu-chinh-dong-ho-nuoc/00-tong-quan.md)
-  * [01. Tính năng](gan-va-hieu-chinh-dong-ho-nuoc/01-tinh-nang/README.md)
-    * [Tiếp nhận & gắn đồng hồ nước](gan-va-hieu-chinh-dong-ho-nuoc/01-tinh-nang/tiep-nhan-va-gan-dong-ho.md)
-  * [02. Quy tắc dùng chung](gan-va-hieu-chinh-dong-ho-nuoc/02-quy-tac-chung.md)
-  * [03. Nhật ký chốt (Decision Log)](gan-va-hieu-chinh-dong-ho-nuoc/03-nhat-ky-chot.md)
-* [Thay thế đồng hồ nước](thay-the-dong-ho-nuoc/README.md)
-  * [00. Tổng quan dự án](thay-the-dong-ho-nuoc/00-tong-quan.md)
-  * [01. Tính năng](thay-the-dong-ho-nuoc/01-tinh-nang/README.md)
-    * [Lập phiếu & thay thế đồng hồ nước](thay-the-dong-ho-nuoc/01-tinh-nang/lap-phieu-thay-the-dong-ho.md)
-  * [02. Quy tắc dùng chung](thay-the-dong-ho-nuoc/02-quy-tac-chung.md)
-  * [03. Nhật ký chốt (Decision Log)](thay-the-dong-ho-nuoc/03-nhat-ky-chot.md)
+* [Trang chủ — Cổng tài liệu dự án](README.md)
+
+## 1. Gắn và hiệu chỉnh ĐHN
+* [Giới thiệu](gan-va-hieu-chinh-dong-ho-nuoc/README.md)
+* [00. Tổng quan dự án](gan-va-hieu-chinh-dong-ho-nuoc/00-tong-quan.md)
+* [01. Tính năng](gan-va-hieu-chinh-dong-ho-nuoc/01-tinh-nang/README.md)
+  * [Tiếp nhận & gắn đồng hồ nước](gan-va-hieu-chinh-dong-ho-nuoc/01-tinh-nang/tiep-nhan-va-gan-dong-ho.md)
+* [02. Quy tắc dùng chung](gan-va-hieu-chinh-dong-ho-nuoc/02-quy-tac-chung.md)
+* [03. Nhật ký chốt (Decision Log)](gan-va-hieu-chinh-dong-ho-nuoc/03-nhat-ky-chot.md)
+
+## 2. Thay thế ĐHN
+* [Giới thiệu](thay-the-dong-ho-nuoc/README.md)
+* [00. Tổng quan dự án](thay-the-dong-ho-nuoc/00-tong-quan.md)
+* [01. Tính năng](thay-the-dong-ho-nuoc/01-tinh-nang/README.md)
+  * [Lập phiếu & thay thế đồng hồ nước](thay-the-dong-ho-nuoc/01-tinh-nang/lap-phieu-thay-the-dong-ho.md)
+* [02. Quy tắc dùng chung](thay-the-dong-ho-nuoc/02-quy-tac-chung.md)
+* [03. Nhật ký chốt (Decision Log)](thay-the-dong-ho-nuoc/03-nhat-ky-chot.md)
+
+## 3. Ghi thu tiền nước
+* [Giới thiệu](ghi-thu-tien-nuoc/README.md)
+* [00. Tổng quan dự án](ghi-thu-tien-nuoc/00-tong-quan.md)
+* [01. Tính năng](ghi-thu-tien-nuoc/01-tinh-nang/README.md)
+  * [Ghi chỉ số & thu tiền nước](ghi-thu-tien-nuoc/01-tinh-nang/ghi-chi-so-va-thu-tien.md)
+* [02. Quy tắc dùng chung](ghi-thu-tien-nuoc/02-quy-tac-chung.md)
+* [03. Nhật ký chốt (Decision Log)](ghi-thu-tien-nuoc/03-nhat-ky-chot.md)
+
+## Tham khảo (Dự án mẫu)
 * [du-an-mau](du-an-mau/README.md)
   * [00. Tổng quan dự án](du-an-mau/00-tong-quan.md)
-  * [02. Quy tắc dùng chung](du-an-mau/02-quy-tac-chung.md)
-  * [03. Nhật ký chốt (Decision Log)](du-an-mau/03-nhat-ky-chot.md)
-  * [Summary](du-an-mau/SUMMARY.md)
   * [01-tinh-nang](du-an-mau/01-tinh-nang/README.md)
     * [Đặt sân nhanh](du-an-mau/01-tinh-nang/dat-san-nhanh.md)
+  * [02. Quy tắc dùng chung](du-an-mau/02-quy-tac-chung.md)
+  * [03. Nhật ký chốt (Decision Log)](du-an-mau/03-nhat-ky-chot.md)
