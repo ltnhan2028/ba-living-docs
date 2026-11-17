@@ -103,4 +103,4 @@ Gồm **5 phần**:
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 chương `V`; đánh dấu thiếu toàn bộ BR/FR/AC, Offline mode & mâu thuẫn ĐHN gỡ (`OPEN-05`, `OPEN-08`) |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 chương `V`; đánh dấu thiếu toàn bộ BR/FR/AC, Offline mode & mâu thuẫn ĐHN gỡ (`OPEN-05`, `OPEN-08`) |

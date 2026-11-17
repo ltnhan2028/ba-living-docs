@@ -62,4 +62,4 @@ Các bước tối thiểu cần làm rõ:
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Tạo khung đặc tả cho chức năng *Import vật tư* có mặt ở Bảng `2.1` nhưng bị bỏ trống trong SRS V1.4 (`OPEN-04`) |
+| `v1.0` | 2026-11-17 | nhanlt | Tạo khung đặc tả cho chức năng *Import vật tư* có mặt ở Bảng `2.1` nhưng bị bỏ trống trong SRS V1.4 (`OPEN-04`) |

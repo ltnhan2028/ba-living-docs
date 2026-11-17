@@ -99,4 +99,4 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 mục `4.6`; đánh dấu thiếu toàn bộ BR/FR Chốt bảng kê & Thống kê vật tư (`OPEN-02`, `OPEN-05`) |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.6`; đánh dấu thiếu toàn bộ BR/FR Chốt bảng kê & Thống kê vật tư (`OPEN-02`, `OPEN-05`) |

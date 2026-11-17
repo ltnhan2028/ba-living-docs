@@ -8,9 +8,9 @@ Ghi nhận các mốc phiên bản và các quyết định nghiệp vụ (`DEC-
 
 | Ngày | Mã | Nội dung đã chốt | Người xác nhận | Tài liệu bị ảnh hưởng |
 |---|---|---|---|---|
-| 2026-11-13 | `DEC-01` | Khởi tạo khung kho tài liệu dự án Thay thế đồng hồ nước | Lê Nhân | [Tổng quan dự án](00-tong-quan.md) |
-| 2026-11-17 | `DEC-02` | Đẩy bản Baseline `v1.0` từ `SRS_ThayDHN_V1.4.docx` (bản ký hợp đồng) lên Living Docs kèm 21 sơ đồ và 26 ảnh Figma | Lê Nhân | Toàn bộ thư mục `thay-the-dong-ho-nuoc/` |
-| 2026-11-17 | `DEC-03` | Chuẩn hóa cấu trúc cây tài liệu dự án Thay ĐHN theo chuẩn quốc tế **IEEE 830 / ISO 29148** (5 chương: Tổng quan → Dữ liệu & API → 11 Chức năng → NFR → Phụ lục) | Lê Nhân | `SUMMARY.md` và các file chương `02`, `04`, `05`, `06` |
+| 2026-11-13 | `DEC-01` | Khởi tạo khung kho tài liệu dự án Thay thế đồng hồ nước | nhanlt | [Tổng quan dự án](00-tong-quan.md) |
+| 2026-11-17 | `DEC-02` | Đẩy bản Baseline `v1.0` từ `SRS_ThayDHN_V1.4.docx` (bản ký hợp đồng) lên Living Docs kèm 21 sơ đồ và 26 ảnh Figma | nhanlt | Toàn bộ thư mục `thay-the-dong-ho-nuoc/` |
+| 2026-11-17 | `DEC-03` | Chuẩn hóa cấu trúc cây tài liệu dự án Thay ĐHN theo chuẩn quốc tế **IEEE 830 / ISO 29148** (5 chương: Tổng quan → Dữ liệu & API → 11 Chức năng → NFR → Phụ lục) | nhanlt | `SUMMARY.md` và các file chương `02`, `04`, `05`, `06` |
 
 ---
 

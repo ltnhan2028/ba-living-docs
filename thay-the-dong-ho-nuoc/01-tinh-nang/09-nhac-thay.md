@@ -104,4 +104,4 @@ Lập bảng kê nhắc thay kế thừa các `FR` của luồng *Lập bảng k
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 mục `4.8`; gắn note thiếu định nghĩa "Kỳ", validate số BK nhập tay & mâu thuẫn `BR-37` |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.8`; gắn note thiếu định nghĩa "Kỳ", validate số BK nhập tay & mâu thuẫn `BR-37` |

@@ -187,4 +187,4 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 mục `4.1`; sửa lỗi đánh mã `BR-YC-0` → `BR-YC-07`; gắn note các điểm thiếu |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.1`; sửa lỗi đánh mã `BR-YC-0` → `BR-YC-07`; gắn note các điểm thiếu |

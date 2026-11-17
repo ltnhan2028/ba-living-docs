@@ -104,4 +104,4 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 mục `4.2`; đánh dấu mâu thuẫn Code (`OPEN-03`) và thiếu AC |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.2`; đánh dấu mâu thuẫn Code (`OPEN-03`) và thiếu AC |

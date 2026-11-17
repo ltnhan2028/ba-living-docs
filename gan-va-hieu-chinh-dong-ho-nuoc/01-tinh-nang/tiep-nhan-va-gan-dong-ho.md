@@ -31,4 +31,4 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v0.1` | 2026-11-13 | Lê Nhân | Khởi tạo khung đặc tả dự án Gắn và hiệu chỉnh đồng hồ nước |
+| `v0.1` | 2026-11-13 | nhanlt | Khởi tạo khung đặc tả dự án Gắn và hiệu chỉnh đồng hồ nước |

@@ -106,4 +106,4 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 mục `4.4`; ghi nhận mâu thuẫn trạng thái `Trả về` vs `Chưa duyệt` và ghi đè `Ghi chú` |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.4`; ghi nhận mâu thuẫn trạng thái `Trả về` vs `Chưa duyệt` và ghi đè `Ghi chú` |

@@ -53,8 +53,10 @@ Mỗi file đặc tả tính năng phải giữ đủ 7 mục sau theo đúng th
 ```markdown
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | YYYY-MM-DD | ... | ... |
+| `v1.0` | YYYY-MM-DD | nhanlt | ... |
 ```
+
+- **Người chốt mặc định:** Chủ dự án tên đầy đủ là **Lê Thanh Nhàn**; khi ghi cột `Người chốt` (Lịch sử thay đổi) hoặc `Người xác nhận` (`03-nhat-ky-chot.md`), luôn ghi là `nhanlt`.
 
 ---
 

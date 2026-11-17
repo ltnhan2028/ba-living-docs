@@ -130,4 +130,4 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 mục `4.3`; gắn note lệch `FR-LBK-04` vs UI, thiếu công thức lọc & luồng sửa BK trả về |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.3`; gắn note lệch `FR-LBK-04` vs UI, thiếu công thức lọc & luồng sửa BK trả về |

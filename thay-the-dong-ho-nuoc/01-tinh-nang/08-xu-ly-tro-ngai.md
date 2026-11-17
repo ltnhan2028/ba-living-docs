@@ -114,4 +114,4 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 mục `4.7`; cảnh báo mâu thuẫn `BR-29` vs `4.7.1 & BR-37` (`OPEN-01`) |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.7`; cảnh báo mâu thuẫn `BR-29` vs `4.7.1 & BR-37` (`OPEN-01`) |

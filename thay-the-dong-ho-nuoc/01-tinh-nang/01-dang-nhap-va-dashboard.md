@@ -75,4 +75,4 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 mục `3.2`; đánh dấu các phần thiếu (Dashboard, Phân quyền, Nhật ký, AC) |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `3.2`; đánh dấu các phần thiếu (Dashboard, Phân quyền, Nhật ký, AC) |

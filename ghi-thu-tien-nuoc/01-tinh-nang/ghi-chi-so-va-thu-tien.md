@@ -60,4 +60,4 @@ Nhân viên thu tiền (hoặc khách hàng thanh toán online) → hệ thống
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v0.1` | 2026-11-16 | Lê Nhân | Khởi tạo khung đặc tả dự án Ghi thu tiền nước |
+| `v0.1` | 2026-11-16 | nhanlt | Khởi tạo khung đặc tả dự án Ghi thu tiền nước |

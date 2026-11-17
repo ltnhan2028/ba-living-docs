@@ -4,4 +4,4 @@ Ghi nhận các quyết định nghiệp vụ quan trọng đã thống nhất v
 
 | Ngày | Mã | Nội dung đã chốt | Người xác nhận | Tài liệu bị ảnh hưởng |
 |---|---|---|---|---|
-| 2026-11-13 | `DEC-01` | Khởi tạo kho tài liệu cho dự án Gắn và hiệu chỉnh đồng hồ nước | Lê Nhân | [Tổng quan dự án](00-tong-quan.md) |
+| 2026-11-13 | `DEC-01` | Khởi tạo kho tài liệu cho dự án Gắn và hiệu chỉnh đồng hồ nước | nhanlt | [Tổng quan dự án](00-tong-quan.md) |

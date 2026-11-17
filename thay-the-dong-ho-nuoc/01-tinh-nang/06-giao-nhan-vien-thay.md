@@ -93,4 +93,4 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | Lê Nhân | Chuyển thể từ SRS V1.4 mục `4.5`; ghi nhận thiếu luồng đổi/thu hồi phân công và bộ lọc chi tiết |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.5`; ghi nhận thiếu luồng đổi/thu hồi phân công và bộ lọc chi tiết |
