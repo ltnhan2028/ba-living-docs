@@ -1,6 +1,6 @@
-# 00. Tổng quan dự án — Phần mềm Báo thay Đồng hồ nước (Nhà Bè)
+# 1. Tổng quan hệ thống & Phân quyền — Phần mềm Báo thay ĐHN (Nhà Bè)
 
-> **Phiên bản:** `v1.0` · **Cập nhật:** 2026-11-17 · **Trạng thái:** Baseline từ SRS V1.4 (bản ký hợp đồng)
+> **Phiên bản:** `v1.0` · **Cập nhật:** 2026-11-17 · **Trạng thái:** Baseline từ SRS V1.4 (chuẩn hóa cấu trúc ISO/IEC/IEEE 29148)
 
 > [!NOTE]
 > Tài liệu này chuyển thể nguyên trạng nội dung bản gốc **SRS_ThayDHN_V1.4** (tài liệu ký hợp đồng với Công ty Cổ phần Cấp nước Nhà Bè, ngày 10/03/2026) sang cấu trúc chuẩn **ISO/IEC/IEEE 29148** trên Living Docs. Các nội dung còn thiếu hoặc mâu thuẫn ở bản V1.4 được đánh dấu bằng thẻ `[!WARNING]` và `[!CAUTION]` để BA/PM/Dev/QA bổ sung và đối chiếu với phần mềm thực tế.
@@ -47,7 +47,7 @@ Phần mềm mới **không thay thế hoàn toàn** hệ thống hiện tại c
 | Cơ sở dữ liệu | Kiến trúc dữ liệu sẵn có của CNNB | Thiết kế DB tương thích với hệ thống hiện có của CNNB |
 
 > [!WARNING] Thiếu đặc tả ở V1.4 — Kiến trúc tích hợp & API
-> Mục `1.4` chỉ mô tả ở mức khái niệm, chưa có tài liệu đặc tả API (endpoint, payload, đồng bộ real-time hay batch/cron, xử lý retry khi Billing sập). Xem chi tiết cần bổ sung tại [02. Quy tắc dùng chung](02-quy-tac-chung.md#3-đặc-tả-tích-hợp--api).
+> Mục `1.4` chỉ mô tả ở mức khái niệm, chưa có tài liệu đặc tả API (endpoint, payload, đồng bộ real-time hay batch/cron, xử lý retry khi Billing sập). Xem chi tiết cần bổ sung tại [2.2. Đặc tả Tích hợp & API](04-tich-hop-api.md).
 
 ---
 
@@ -141,12 +141,13 @@ Theo mục `3.5` của SRS V1.4, hệ thống có 4 đối tượng có vòng đ
 
 ---
 
-## 6. Danh mục tài liệu đặc tả chi tiết
+## 6. Cấu trúc bộ tài liệu SRS (chuẩn IEEE 830 / ISO 29148)
 
-- **Phần 1 — Tổng quan & Kiến trúc:** Tài liệu này (`00-tong-quan.md`)
-- **Phần 2 — Đặc tả chức năng Web & Mobile (11 module):** [Danh mục tính năng](01-tinh-nang/README.md)
-- **Phần 3 — Quy tắc chung, Dữ liệu, API, NFR & Danh sách điểm thiếu:** [02. Quy tắc dùng chung](02-quy-tac-chung.md)
-- **Phần 4 — Nhật ký quyết định & Vấn đề cần chốt:** [03. Nhật ký chốt](03-nhat-ky-chot.md)
+- **Chương 1 — Giới thiệu & Tổng quan hệ thống:** [README](README.md) · Tài liệu này (`00-tong-quan.md`)
+- **Chương 2 — Dữ liệu & Tích hợp hệ thống:** [2.1. Quy tắc chung, Dữ liệu & Master Data](02-quy-tac-chung.md) · [2.2. Đặc tả Tích hợp & API](04-tich-hop-api.md)
+- **Chương 3 — Đặc tả chức năng (`3.1` → `3.11`):** [Danh mục 11 tính năng Web & Mobile](01-tinh-nang/README.md)
+- **Chương 4 — Yêu cầu phi chức năng (NFR):** [4.1. Hiệu năng, Offline, Bảo mật & Audit Log](05-yeu-cau-phi-chuc-nang.md)
+- **Chương 5 — Phụ lục & Quản trị thay đổi:** [5.1. Điểm thiếu & mâu thuẫn V1.4](06-diem-thieu-va-mau-thuan.md) · [5.2. Nhật ký chốt (`DEC-*` / `OPEN-*`)](03-nhat-ky-chot.md)
 
 ---
 

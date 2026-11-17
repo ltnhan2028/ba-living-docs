@@ -1,4 +1,4 @@
-# 03. Nhật ký chốt (Decision Log)
+# 5.2. Nhật ký chốt & Vấn đề mở (Decision Log)
 
 Ghi nhận các mốc phiên bản và các quyết định nghiệp vụ (`DEC-*`) đã thống nhất với Khách hàng / PM / Dev, cùng danh sách vấn đề mở (`OPEN-*`) cần chốt để nâng cấp từ bản Baseline `v1.0` lên phần mềm hiện tại (`v1.x`) và Phase nâng cấp (`v2.0`).
 
@@ -9,7 +9,8 @@ Ghi nhận các mốc phiên bản và các quyết định nghiệp vụ (`DEC-
 | Ngày | Mã | Nội dung đã chốt | Người xác nhận | Tài liệu bị ảnh hưởng |
 |---|---|---|---|---|
 | 2026-11-13 | `DEC-01` | Khởi tạo khung kho tài liệu dự án Thay thế đồng hồ nước | Lê Nhân | [Tổng quan dự án](00-tong-quan.md) |
-| 2026-11-17 | `DEC-02` | Đẩy bản Baseline `v1.0` từ `SRS_ThayDHN_V1.4.docx` (bản ký hợp đồng) lên Living Docs theo cấu trúc chuẩn ISO/IEC/IEEE 29148, gắn thẻ đánh dấu các điểm thiếu & mâu thuẫn để đối chiếu với phần mềm thực tế | Lê Nhân | Toàn bộ thư mục `thay-the-dong-ho-nuoc/` |
+| 2026-11-17 | `DEC-02` | Đẩy bản Baseline `v1.0` từ `SRS_ThayDHN_V1.4.docx` (bản ký hợp đồng) lên Living Docs kèm 21 sơ đồ và 26 ảnh Figma | Lê Nhân | Toàn bộ thư mục `thay-the-dong-ho-nuoc/` |
+| 2026-11-17 | `DEC-03` | Chuẩn hóa cấu trúc cây tài liệu dự án Thay ĐHN theo chuẩn quốc tế **IEEE 830 / ISO 29148** (5 chương: Tổng quan → Dữ liệu & API → 11 Chức năng → NFR → Phụ lục) | Lê Nhân | `SUMMARY.md` và các file chương `02`, `04`, `05`, `06` |
 
 ---
 
@@ -29,4 +30,4 @@ Ghi nhận các mốc phiên bản và các quyết định nghiệp vụ (`DEC-
 | `OPEN-07` | Hủy báo thay & Lý do trả về BK | Có bắt buộc nhập lý do khi hủy báo thay theo yêu cầu (`BR-YC-04`) không? Có lưu lịch sử nhiều lần trả về BK thay vì ghi đè (`FR-DBK-04`) không? | Trung bình | [02. Báo thay theo yêu cầu](01-tinh-nang/02-bao-thay-theo-yeu-cau.md), [05. Duyệt bảng kê](01-tinh-nang/05-duyet-bang-ke.md) |
 | `OPEN-08` | Mobile Offline & Concurrency | Xử lý mất mạng ngoài hiện trường và xung đột dữ liệu giữa Web và Mobile App như thế nào? | Cao | [11. Mobile App hiện trường](01-tinh-nang/11-mobile-app-hien-truong.md) |
 | `OPEN-09` | State Diagram Nhắc thay | Bổ sung lại sơ đồ trạng thái đúng của đối tượng Nhắc thay (V1.4 dán nhầm ảnh Báo thay). | Thấp | [00. Tổng quan](00-tong-quan.md) |
-| `OPEN-10` | Ma trận phân quyền & API / NFR | Chốt CRUD Matrix theo phòng ban, đặc tả API tích hợp Billing/VPĐT và các ngưỡng NFR. | Cao | [00. Tổng quan](00-tong-quan.md), [02. Quy tắc dùng chung](02-quy-tac-chung.md) |
+| `OPEN-10` | Ma trận phân quyền & API / NFR | Chốt CRUD Matrix theo phòng ban, đặc tả API tích hợp Billing/VPĐT và các ngưỡng NFR. | Cao | [1. Tổng quan](00-tong-quan.md), [2.2. API](04-tich-hop-api.md), [4.1. NFR](05-yeu-cau-phi-chuc-nang.md) |
