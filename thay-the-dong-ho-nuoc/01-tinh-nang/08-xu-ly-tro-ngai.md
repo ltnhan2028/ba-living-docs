@@ -108,7 +108,9 @@
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-> Ảnh màn hình Figma (`Hình 27` trong SRS V1.4) sẽ được bổ sung sau.
+**Hình 27: MH Xử lý trở ngại**
+
+![Màn hình xử lý trở ngại](../assets/ui-27-xu-ly-tro-ngai.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|

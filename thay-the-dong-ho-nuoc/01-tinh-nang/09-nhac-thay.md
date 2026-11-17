@@ -98,7 +98,9 @@ Lập bảng kê nhắc thay kế thừa các `FR` của luồng *Lập bảng k
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-> Ảnh màn hình Figma (`Hình 30` trong SRS V1.4) sẽ được bổ sung sau.
+**Hình 30: MH Nhắc thay**
+
+![Màn hình nhắc thay](../assets/ui-30-nhac-thay.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|

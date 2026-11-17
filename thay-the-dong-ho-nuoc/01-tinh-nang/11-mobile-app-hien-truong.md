@@ -81,7 +81,25 @@ Gồm **5 phần**:
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-> Ảnh màn hình Mobile Figma (`Hình 32`, `Hình 33`, `Hình 34`, `Hình 35` trong SRS V1.4) sẽ được bổ sung sau.
+**Hình 32: MH Home (Mobile App)**
+
+![Mobile Home](../assets/ui-32-mobile-home.jpg)
+
+**Hình 33: Danh sách thay ĐHN (Mobile App)**
+
+![Mobile Danh sách thay ĐHN 1](../assets/ui-33a-mobile-ds-thay.png)
+
+![Mobile Danh sách thay ĐHN 2](../assets/ui-33b-mobile-ds-thay-chi-tiet.png)
+
+**Hình 34: MH Hoàn công thay ĐHN (Mobile App)**
+
+![Mobile Hoàn công 1](../assets/ui-34a-mobile-hoan-cong.png)
+
+![Mobile Hoàn công 2](../assets/ui-34b-mobile-hoan-cong.jpg)
+
+**Hình 35: MH Báo cáo trở ngại (Mobile App)**
+
+![Mobile Báo cáo trở ngại](../assets/ui-35-mobile-bao-tro-ngai.jpg)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|

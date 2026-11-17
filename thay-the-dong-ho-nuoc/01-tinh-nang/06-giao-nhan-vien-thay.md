@@ -83,7 +83,13 @@
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-> Ảnh màn hình Figma (`Hình 20`, `Hình 21` trong SRS V1.4) sẽ được bổ sung sau.
+**Hình 20: MH Giao NV thay ĐHN**
+
+![Màn hình giao nhân viên thay ĐHN](../assets/ui-20-giao-nv-thay.png)
+
+**Hình 21: Popup giao nhân viên thay ĐHN**
+
+![Popup giao nhân viên thay ĐHN](../assets/ui-21-popup-giao-nv-thay.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|

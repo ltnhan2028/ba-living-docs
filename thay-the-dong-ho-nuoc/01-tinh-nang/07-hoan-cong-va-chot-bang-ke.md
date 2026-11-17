@@ -85,7 +85,17 @@
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-> Ảnh màn hình Figma (`Hình 23`, `Hình 24`, `Hình 25` trong SRS V1.4) sẽ được bổ sung sau.
+**Hình 23: MH Danh sách hoàn công**
+
+![Màn hình danh sách hoàn công](../assets/ui-23-danh-sach-hoan-cong.png)
+
+**Hình 24: Popup cập nhật hoàn công**
+
+![Popup cập nhật hoàn công](../assets/ui-24-popup-cap-nhat-hoan-cong.png)
+
+**Hình 25: Thống kê vật tư và chốt bảng kê**
+
+![Thống kê vật tư và chốt bảng kê](../assets/ui-25-thong-ke-vat-tu-chot-bk.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|

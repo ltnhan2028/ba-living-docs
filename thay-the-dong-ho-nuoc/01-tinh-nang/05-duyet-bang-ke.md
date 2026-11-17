@@ -96,7 +96,13 @@
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-> Ảnh màn hình Figma (`Hình 17`, `Hình 18` trong SRS V1.4) sẽ được bổ sung sau.
+**Hình 17: MH Duyệt bảng kê**
+
+![Màn hình duyệt bảng kê](../assets/ui-17-duyet-bang-ke.png)
+
+**Hình 18: Popup xem chi tiết bảng kê**
+
+![Popup xem chi tiết bảng kê](../assets/ui-18-popup-chi-tiet-bang-ke.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|

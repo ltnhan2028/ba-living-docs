@@ -169,7 +169,21 @@
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-> Ảnh màn hình Figma (`Hình 6`, `Hình 7`, `Hình 8`, `Hình 9` trong SRS V1.4) sẽ được bổ sung sau.
+**Hình 6: MH Báo thay theo yêu cầu — Danh sách báo thay theo yêu cầu**
+
+![Danh sách báo thay theo yêu cầu](../assets/ui-06-bao-thay-yeu-cau-ds.png)
+
+**Hình 7: MH Báo thay theo yêu cầu — Popup tìm kiếm khách hàng**
+
+![Popup tìm kiếm khách hàng](../assets/ui-07-popup-tim-kh.png)
+
+**Hình 8: MH Báo thay theo yêu cầu — Popup Tạo báo thay theo yêu cầu**
+
+![Popup tạo báo thay theo yêu cầu](../assets/ui-08-popup-tao-bao-thay.png)
+
+**Hình 9: MH Duyệt báo thay theo yêu cầu**
+
+![Màn hình duyệt báo thay theo yêu cầu](../assets/ui-09-duyet-bao-thay-yeu-cau.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|

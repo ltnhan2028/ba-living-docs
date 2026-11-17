@@ -65,7 +65,13 @@
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-> Chưa đính kèm ảnh màn hình Figma (sẽ bổ sung sau). Tài liệu gốc V1.4 có `Hình 1 Trang đăng nhập` và `Hình 2 Màn hình Dashboard quản lý thay ĐHN`.
+**Hình 1: Trang đăng nhập**
+
+![Trang đăng nhập](../assets/ui-01-dang-nhap.png)
+
+**Hình 2: Màn hình Dashboard quản lý thay ĐHN**
+
+![Màn hình Dashboard quản lý thay ĐHN](../assets/ui-02-dashboard.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|

@@ -94,7 +94,13 @@
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-> Ảnh màn hình Figma (`Hình 10`, `Hình 11` trong SRS V1.4) sẽ được bổ sung sau.
+**Hình 10: MH Duyệt báo thay bất thường**
+
+![Màn hình duyệt báo thay bất thường](../assets/ui-10-duyet-bao-thay-bat-thuong.png)
+
+**Hình 11: MH Xem hình ảnh báo thay**
+
+![Màn hình xem hình ảnh báo thay](../assets/ui-11-xem-hinh-anh-bao-thay.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
