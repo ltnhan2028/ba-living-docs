@@ -1,15 +1,16 @@
 # 03. Duyệt báo thay bất thường (Theo Code đọc số)
 
-> **Phiên bản hiện tại:** `v1.0` · **Cập nhật lần cuối:** 2026-11-17 · **Trạng thái:** Baseline từ SRS V1.4
+> **Phiên bản hiện tại:** `v1.1` · **Cập nhật lần cuối:** 2026-11-23 · **Trạng thái:** Cập nhật theo phần mềm hiện tại (`As-Is` — chốt danh mục 6 Code `60–65`)
 
 ---
 
 ## 1. Mục tiêu & Tác nhân liên quan
 
-- **Mục tiêu:** Duyệt 2 cấp đối với các đề xuất báo thay bất thường được sinh tự động từ **code lỗi ghi chỉ số** của công tác đọc số, trước khi chuyển sang lập bảng kê.
+- **Mục tiêu:** Duyệt 2 cấp đối với các đề xuất báo thay bất thường được sinh tự động từ **code đầu 6** của công tác đọc số, trước khi chuyển sang lập bảng kê.
 - **Tác nhân liên quan:**
-  - **Cấp duyệt 1:** Phòng QLĐHN.
-  - **Cấp duyệt 2:** Phòng KTKS.
+  - **Cấp duyệt 1:** Phòng Quản lý Đồng hồ nước (`Phòng ĐHN`).
+  - **Cấp duyệt 2:** Phòng Kiểm tra kiểm soát (`Phòng KTKS`).
+- **Route thực tế:** `/baothaybatthuong`.
 - **Tham chiếu SRS V1.4:** Mục `4.2 Duyệt báo thay bất thường`.
 
 ---
@@ -20,11 +21,13 @@
 
 ![Flowchart duyệt báo thay bất thường](../assets/flowchart-duyet-bao-thay-bat-thuong.png)
 
-### 2.2. Diễn giải luồng chính
-1. Báo thay theo code được khởi tạo tự động dựa trên code đầu 6 từ quá trình Đọc số → **không có màn hình tạo tay**, chỉ có màn hình duyệt xác nhận.
-2. **Duyệt cấp 1 (Phòng QLĐHN):** Kiểm tra danh bộ có code bất thường + hình ảnh đọc số → Duyệt hoặc Hủy duyệt.
-3. **Duyệt cấp 2 (Phòng KTKS):** Chỉ nhận các báo thay đã được Phòng QLĐHN duyệt. Khi KTKS duyệt, báo thay đủ điều kiện sang bước Lập bảng kê (`BR-BT-02`, `BR-BT-03`).
-4. **Ưu tiên chống trùng với báo thay định kỳ:** Khi thực hiện báo thay bất thường/theo yêu cầu mà trùng danh bộ đang có báo thay định kỳ, hệ thống cảnh báo và hủy báo thay định kỳ để ưu tiên báo thay bất thường/theo yêu cầu.
+### 2.2. Diễn giải luồng chính (`v1.1`)
+1. Báo thay theo code được sinh tự động từ hệ thống Đọc số theo **6 mã code đầu 6 (`60–65`)** → không có màn hình tạo tay.
+2. **Duyệt cấp 1 (Tab `Phòng Quản lý Đồng hồ nước`):** Kiểm tra danh bộ, hình ảnh đọc số, ghi chú trùng bảng kê → bấm `Duyệt` hoặc `Hủy` (hủy duyệt).
+3. **Duyệt cấp 2 (Tab `Phòng Kiểm tra kiểm soát`):**
+   - Nhận các báo thay đã được Phòng ĐHN duyệt.
+   - **Bắt buộc có hình/file đính kèm trước khi duyệt cấp 2 (`BR-BT-06`):** Nếu chưa có ảnh, hệ thống chặn và yêu cầu upload qua `/BaoThayBatThuong/ViewImages`.
+   - **Chống trùng bảng kê (`BR-BT-07`):** Các danh bộ đang nằm trong bảng kê khác (`nhap`, `chua_giao`, `da_giao`) hiển thị cảnh báo tại cột `GHI CHÚ`; không cho phép duyệt cấp 2 (KTKS) để lập bảng kê trùng khi chưa xử lý bảng kê hiện tại.
 
 ### 2.3. Sequence Diagram
 
@@ -32,76 +35,65 @@
 
 ---
 
-## 3. Đặc tả màn hình & Trường dữ liệu
+## 3. Đặc tả màn hình & Trường dữ liệu (`/baothaybatthuong`)
 
-- **Hành vi tải trang:** Mặc định khi vào màn hình **không load dữ liệu**, bắt buộc chọn tối thiểu 1 điều kiện tìm kiếm.
-- **Tab phân cấp duyệt:**
-  - Tab **Phòng QLĐHN:** Hiển thị báo thay có code bất thường (chờ duyệt / đã duyệt cấp 1).
-  - Tab **Phòng KTKS:** Chỉ hiển thị báo thay đã được Phòng QLĐHN duyệt.
-- **Bộ lọc tìm kiếm cơ bản:**
+- **Hành vi tải trang:** **Tự động load dữ liệu** vào 2 bảng song song (Trái: Chờ duyệt | Phải: Đã duyệt).
+- **2 Tab phân cấp duyệt:** `Phòng Quản lý Đồng hồ nước` (mặc định) và `Phòng Kiểm tra kiểm soát`.
+- **Bộ lọc tìm kiếm:**
 
-| Trường | Kiểu | Mô tả (theo V1.4) | Điểm cần bổ sung `[TODO]` |
-|---|---|---|---|
-| Tổ | Dropdown | Chọn tổ quản lý danh bộ | Có lọc theo Phòng (`QLĐHN 1/2`) không? |
-| Code | Dropdown | V1.4 mục `4.2.3` chỉ liệt kê `60 (ĐHN ngưng)` và `61 (Kính mờ)` | > [!CAUTION] Mâu thuẫn danh sách Code ở `4.3.3` (`60, 61, 62, 63, 64, 66`) |
-| Loại báo thay | Dropdown | Mục `4.2.3` ghi lấy từ danh mục 22 loại (mục 4.1.2) | Cần xác nhận màn hình Báo thay bất thường có thực sự dùng dropdown `Loại báo thay` này không |
+| Trường | Kiểu | Mô tả (`v1.1`) |
+|---|---|---|
+| Danh bộ | Textbox | Tìm theo danh bộ |
+| MLT | Textbox | Tìm theo mã lộ trình |
+| Phòng | Select2 | `Phòng ban ghi thu 1`, `Phòng ban ghi thu 2` |
+| Tổ | Select2 | 7 tổ quản lý ghi thu |
+| Năm / Kỳ / Đợt | Select2 | `Năm` (`2021–2026`), `Kỳ` (`1–12`), `Đợt` (`1–12`) |
+| Code | Select2 | **6 mã chính thức (`DEC-04` / đóng `OPEN-03`):**<br>• `60 - Ngưng`<br>• `61 - Kính mờ`<br>• `62 - Quay ngược, gắn ngược`<br>• `63 - Mờ mặt số, mất ĐHN`<br>• `64 - Gỡ co nối,khóa góc, tự nâng, hạ`<br>• `65 - Trở ngại thay` |
 
-- **Thao tác trên 2 bảng (Chờ duyệt / Đã duyệt):** Checkbox chọn 1 hoặc nhiều dòng; Icon xem hình ảnh báo thay (phóng to khi click); Button **Duyệt**; Button **Hủy** (chuyển từ Đã duyệt về Chờ duyệt).
+*(Không có bộ lọc `Loại báo thay` trên màn hình này; bổ sung nút `Xuất Excel`.)*
+
+- **Bảng dữ liệu (20 cột):** `Checkbox`, `STT`, `HÌNH` (icon mắt xem/upload ảnh), `DANH BỘ`, `TÊN KHÁCH HÀNG`, `MLT`, `CODE`, `TỔ`, `NHÂN VIÊN`, `NĂM`, `KỲ`, `ĐỢT`, `CS BÁO`, `NGƯỜI DUYỆT`, `NGÀY DUYỆT`, `PHÒNG BAN`, `GHI CHÚ`, `TRẠNG THÁI KTKS`, `LÝ DO TỪ CHỐI (KTKS)`, `KẾT QUẢ (KTKS)`.
 
 ---
 
 ## 4. Yêu cầu chức năng (Functional Requirements)
 
-| Mã | Mô tả / Hành vi hệ thống (theo SRS V1.4) |
+| Mã | Mô tả / Hành vi hệ thống (`v1.1`) |
 |---|---|
-| `FR-BT-01` | Khi báo thay bất thường đã được Phòng QLĐHN duyệt nhưng chưa được Phòng KTKS duyệt, báo thay đó vẫn hiển thị trong danh sách **Đã duyệt** tại tab của Phòng QLĐHN. |
-| `FR-BT-02` | Trên mỗi báo thay hiển thị thêm trạng thái duyệt của Phòng QLĐHN. |
-| `FR-BT-03` | Trong quá trình duyệt, người dùng có thể xem lại hình ảnh báo thay (từ hệ thống Đọc số). |
-| `FR-BT-04` | Cho phép phóng to hình ảnh khi nhấn vào từng hình. |
-| `FR-BT-05` | Khi chọn một hoặc nhiều báo thay để Duyệt hoặc Hủy duyệt, hiển thị popup xác nhận trước khi thực hiện. |
-| `FR-BT-06` | Danh sách trong bảng Chờ duyệt và Đã duyệt sắp xếp mặc định theo thứ tự thời gian giảm dần (mới → cũ). |
-
-> [!WARNING] Thiếu đặc tả ở V1.4 — Đồng bộ ngược & Hủy vĩnh viễn
-> V1.4 không mô tả trường hợp Phòng QLĐHN **từ chối/hủy hẳn** một code lỗi từ Đọc số (không phải chỉ là "hủy duyệt" trả về chờ duyệt) thì dữ liệu ở hệ thống Đọc số có bị cập nhật ngược lại hay không.
+| `FR-BT-01` – `FR-BT-06` | Duyệt 2 cấp (`Phòng ĐHN` → `Phòng KTKS`); xem/phóng to & upload hình ảnh (`/BaoThayBatThuong/ViewImages`); popup xác nhận khi Duyệt/Hủy duyệt; sắp xếp mới → cũ. |
+| `FR-BT-07` | Hiển thị cảnh báo ở cột `GHI CHÚ` khi danh bộ đang nằm trong bảng kê khác (`Danh bộ đang nằm trong bảng kê <Số BK> (<trạng thái>)`). |
+| `FR-BT-08` | Chặn duyệt Cấp 2 (`Phòng KTKS`) khi bản ghi chưa có ảnh/file upload (`"Không thể duyệt phòng: ... chưa có hình/file upload"`). |
 
 ---
 
 ## 5. Quy tắc nghiệp vụ (Business Rules)
 
-| Mã | Mô tả chi tiết (theo SRS V1.4) |
+| Mã | Mô tả chi tiết (`v1.1`) |
 |---|---|
-| `BR-BT-01` | Báo thay bất thường được liên kết với code đọc số. Code đầu 6 (ví dụ `60`, `61`,...) được đưa vào diện báo thay. |
-| `BR-BT-02` | Luồng duyệt 2 cấp: **Phòng QLĐHN duyệt → Phòng KTKS duyệt → Lập bảng kê**. |
-| `BR-BT-03` | Chỉ báo thay được duyệt đủ cả 2 cấp mới có thể tiến đến bước Lập bảng kê. |
-| `BR-BT-04` | Chỉ có thể hủy duyệt báo thay khi báo thay **chưa lập bảng kê**. |
-| `BR-BT-05` | Hệ thống phân quyền để mỗi đối tượng duyệt chỉ xem và xử lý ở cấp duyệt của mình, không được duyệt thay cấp duyệt khác. |
-
-> [!CAUTION] Mâu thuẫn & Thiếu sót cần chốt (`OPEN-03`)
-> 1. **Danh sách Code hợp lệ:** Chốt chính xác là `{60, 61}` hay `{60, 61, 62, 63, 64, 66}` (như mục `4.3.3`).
-> 2. **Xử lý trùng báo thay định kỳ:** Đoạn văn cuối mục `4.2.4` nhắc *"cảnh báo và hủy báo thay định kỳ"* nhưng chưa có mã `BR` / `FR` cụ thể (ví dụ: nếu báo thay định kỳ đã vào bảng kê hoặc đã duyệt thì có hủy tự động không?).
+| `BR-BT-01` | Báo thay bất thường liên kết với **6 mã code đọc số `60, 61, 62, 63, 64, 65`** *(đóng `OPEN-03`, không có code `66`)*. |
+| `BR-BT-02`, `BR-BT-03` | Luồng duyệt 2 cấp: **Phòng ĐHN duyệt → Phòng KTKS duyệt → Lập bảng kê**. Chỉ báo thay duyệt đủ 2 cấp mới được lập bảng kê. |
+| `BR-BT-04`, `BR-BT-05` | Chỉ hủy duyệt khi chưa lập bảng kê; phân quyền chặt theo cấp duyệt. |
+| `BR-BT-06` | Duyệt Cấp 2 (`Phòng KTKS`) bắt buộc bản ghi phải có tối thiểu 01 hình ảnh/tệp đính kèm. |
+| `BR-BT-07` | Danh bộ đang nằm trong bảng kê chưa hoàn tất (`nhap`, `chua_giao`, `da_giao`) không được phép duyệt Cấp 2 (KTKS) để lập bảng kê trùng. |
 
 ---
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-> [!WARNING] Thiếu 100% ở V1.4 — Cần bổ sung `AC-*`
-> - [ ] `AC-01` *(Đề xuất)*: Khi có dữ liệu code bất thường từ hệ thống Đọc số, bản ghi xuất hiện tại tab `Chờ duyệt` của Phòng QLĐHN và **chưa** xuất hiện ở tab Phòng KTKS.
-> - [ ] `AC-02` *(Đề xuất)*: User thuộc Phòng KTKS không được phép thao tác duyệt ở tab Phòng QLĐHN và ngược lại (`BR-BT-05`).
-> - [ ] `AC-03` *(Đề xuất)*: Sau khi Phòng QLĐHN duyệt, bản ghi xuất hiện ở tab `Đã duyệt` của QLĐHN đồng thời xuất hiện ở tab `Chờ duyệt` của KTKS (`FR-BT-01`).
-> - [ ] `AC-04` *(Đề xuất)*: Không thể hủy duyệt nếu báo thay đã được đưa vào bảng kê (`BR-BT-04`).
+- [x] `AC-01`: Dropdown `Code` hiển thị đúng 6 mã `60–65`.
+- [x] `AC-02`: Bản ghi duyệt ở Tab `Phòng ĐHN` chuyển sang bảng `Đã duyệt` của ĐHN và xuất hiện ở `Chờ duyệt` của Tab `Phòng KTKS`.
+- [x] `AC-03`: Bấm duyệt Cấp 2 khi chưa có hình bị chặn; sau khi upload hình ở `ViewImages` thì duyệt thành công.
+- [ ] `AC-04`: Danh bộ đang nằm trong bảng kê khác (`nhap`, `chua_giao`, `da_giao`) bị chặn duyệt lập bảng kê trùng ở Cấp 2 (`BR-BT-07`).
 
 ---
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-**Hình 10: MH Duyệt báo thay bất thường**
+**Hình 1: Màn hình Duyệt Báo thay bất thường với danh mục 6 mã Code `60–65` (`v1.1`)**
 
-![Màn hình duyệt báo thay bất thường](../assets/ui-10-duyet-bao-thay-bat-thuong.png)
-
-**Hình 11: MH Xem hình ảnh báo thay**
-
-![Màn hình xem hình ảnh báo thay](../assets/ui-11-xem-hinh-anh-bao-thay.png)
+![Màn hình duyệt báo thay bất thường 6 mã code](../assets/ui-v11-03-baothay-batthuong-6code.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
 | `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.2`; đánh dấu mâu thuẫn Code (`OPEN-03`) và thiếu AC |
+| `v1.1` | 2026-11-23 | nhanlt | Chốt `OPEN-03` (6 mã Code `60–65`); bổ sung rule bắt buộc ảnh duyệt Cấp 2 (`BR-BT-06`), cảnh báo chống trùng BK (`BR-BT-07`), bộ lọc Năm/Kỳ/Đợt và 3 cột KTKS |

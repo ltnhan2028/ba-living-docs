@@ -1,13 +1,14 @@
 # 07. Danh sách hoàn công, Thống kê vật tư & Chốt bảng kê
 
-> **Phiên bản hiện tại:** `v1.0` · **Cập nhật lần cuối:** 2026-11-17 · **Trạng thái:** Baseline từ SRS V1.4 (thiếu đặc tả Chốt BK & Vật tư)
+> **Phiên bản hiện tại:** `v1.1` · **Cập nhật lần cuối:** 2026-11-23 · **Trạng thái:** Cập nhật theo phần mềm hiện tại (`As-Is` — chốt `OPEN-02`, `OPEN-05`, `DEC-04` & khóa sửa 5 ngày)
 
 ---
 
 ## 1. Mục tiêu & Tác nhân liên quan
 
-- **Mục tiêu:** Cho phép Phòng QLML tra cứu tình trạng thi công, nhập hoàn công thủ công (khi không thao tác được trên Mobile), chỉnh sửa hoặc hủy hoàn công, xuất thống kê vật tư và chốt hoàn công bảng kê.
+- **Mục tiêu:** Tra cứu tình trạng thi công theo `Danh bộ` hoặc `Bảng kê`, cập nhật hoàn công thủ công trên Portal, hủy hoàn công, xem/in thống kê vật tư sử dụng và **Chốt hoàn công bảng kê**.
 - **Tác nhân liên quan:** Nhân viên / Tổ trưởng Phòng QLML.
+- **Routes thực tế:** `/hoancongthaydhn` (2 chế độ Radio: `Danh bộ` & `Bảng kê`) · `/HoanCongThayDHN/CapNhat/<id>` (Form cập nhật hoàn công).
 - **Tham chiếu SRS V1.4:** Mục `4.6 Danh sách hoàn công thay ĐHN`.
 
 ---
@@ -18,11 +19,18 @@
 
 ![Flowchart danh sách hoàn công](../assets/flowchart-danh-sach-hoan-cong.png)
 
-### 2.2. Diễn giải 3 thao tác hoàn công & chốt bảng kê
-1. **Hoàn công thủ công:** Khi không thể hoàn công trên Mobile App tại hiện trường, NV Phòng QLML tìm danh bộ/bảng kê trên Portal và nhập thông tin hoàn công (`BR-26`).
-2. **Cập nhật hoàn công:** Điều chỉnh lại thông tin hoàn công đã nhập trước đó (khi bảng kê chưa chốt).
-3. **Hủy hoàn công:** Hủy ghi nhận hoàn công cho danh bộ được chọn (bắt buộc nhập lý do, `BR-25`), trả danh bộ về trạng thái chưa hoàn công.
-4. **Thống kê vật tư & Chốt bảng kê:** Xuất Excel vật tư đã dùng trong bảng kê; bấm **Hoàn công bảng kê** để chốt bảng kê — sau khi chốt, các báo thay bên trong không thể điều chỉnh nữa.
+### 2.2. Diễn giải luồng chính (`v1.1`)
+1. **Tra cứu & Cập nhật hoàn công (`/hoancongthaydhn` — chế độ `Danh bộ`):**
+   - Tìm kiếm theo `Danh bộ`, `MLT`, `Bảng kê`, `Số thân`, `Số chì`, `Trạng thái hoàn công`, `Trạng thái chốt BK`...
+   - Mở form `/HoanCongThayDHN/CapNhat/<id>` để nhập/sửa hoàn công: nhập `Ngày thay *`, `Chỉ số gỡ *`, `Số thân gắn *` (tra kho vật tư `Chưa sử dụng` → tự fill thông số ĐHN gắn & tự động điền combo định mức vật tư theo cỡ), `Chì góc mới *`, và hình ảnh trước/sau thay.
+   - Sau khi lưu hoàn công, kho `/ImportVatTu` tự động đổi trạng thái ĐHN gắn & Chì góc sang **`Đã sử dụng`**.
+2. **Hủy hoàn công:**
+   - Bấm `Hủy hoàn công` → hiển thị popup xác nhận *"Bạn có chắc chắn muốn hủy hoàn công báo thay này?"* (hiện tại **chưa bắt buộc nhập lý do**; yêu cầu bổ sung ô lý do hủy đưa vào **Roadmap `v2.0`**).
+   - Sau khi hủy: danh bộ quay về trạng thái **`Đã giao`**, vật tư ĐHN & Chì góc trả lại trạng thái **`Chưa sử dụng`** (xóa sạch thông tin sử dụng cũ).
+3. **Thống kê vật tư & Chốt bảng kê (`/hoancongthaydhn` — chế độ `Bảng kê`):**
+   - Bấm `Xem chi tiết` → mở modal **`DANH SÁCH VẬT TƯ SỬ DỤNG`** kèm nút `In thống kê vật tư`.
+   - Bấm `Xem` → mở modal **`CHỐT HOÀN CÔNG BẢNG KÊ`** (chia 3 nhóm: *Đã hoàn công*, *Trở ngại*, *Chưa thay*) → bấm **`Hoàn công bảng kê`** để chốt sang trạng thái **`Đã chốt`**.
+   - **Quy tắc chốt bảng kê (`OPEN-02` đã chốt):** Hệ thống **cho phép chốt bảng kê ngay cả khi vẫn còn danh bộ `Chưa thay` / `Trở ngại`**; các danh bộ chưa thay sau khi chốt sẽ tự động đổ sang màn hình **`Nhắc thay tự động`** (`/nhacthaytudong`) để lập bảng kê đợt sau. Không có nút `Mở chốt`, và **mọi thao tác sửa/hủy hoàn công (cả icon dòng lẫn nút bulk) đều phải bị khóa** sau khi chốt.
 
 ### 2.3. Sequence Diagram
 
@@ -32,71 +40,70 @@
 
 ## 3. Đặc tả màn hình & Trường dữ liệu
 
-- **Màn hình Danh sách hoàn công:**
-  - Tìm kiếm theo **Danh bộ** hoặc **Bảng kê** (hiển thị mọi báo thay thuộc bảng kê đã được BLĐ duyệt, không phân biệt trạng thái hoàn công; kết quả luôn trả về danh sách danh bộ).
-- **Popup Cập nhật hoàn công:**
-  - Các trường xám tự động load theo danh bộ báo thay; các trường trắng cho phép chỉnh sửa.
-  - Nhóm dữ liệu gồm: Thông tin ĐHN gỡ (tự load ĐHN hiện tại), Thông tin ĐHN gắn (bắt buộc: `Số thân`, `Cỡ ĐHN`, `Số giấy kiểm định`, `Hiệu ĐHN`, `Chì góc`, `Chỉ số`, `Ngày kiểm định`), **Vật tư sử dụng**, và **Hình ảnh hoàn công** (tối thiểu 1 ảnh trước + 1 ảnh sau, tối đa 5 ảnh).
-- **Màn hình Thống kê vật tư và Chốt bảng kê (`Hình 25`):**
-  - Hiển thị danh sách bảng kê đã giao nhân viên thay ĐHN.
-  - Nút **Thống kê vật tư**: xuất Excel danh sách vật tư đã sử dụng trong bảng kê.
-  - Nút **Hoàn công bảng kê**: chốt bảng kê (khóa chỉnh sửa các báo thay trong bảng kê).
+### 3.1. Chế độ `Danh bộ` (`/hoancongthaydhn`)
+- **Bộ lọc cơ bản:** `Trạng thái hoàn công` (`Đã giao`, `Chưa giao`, `Hoàn công`, `Đã hủy`), `Danh bộ`, `MLT`, `Tên KH`, `Địa chỉ`.
+- **Bộ lọc nâng cao:** `Nhân viên thay`, `Nhân viên ghi`, `Trường hợp thay` (4 loại), `Loại báo thay`, `Ngày giao`, `Ngày hoàn công`, `Ngày thay`, `Phòng` (`QLML 1/2`), `Bảng kê`, `Số thân`, `Số chì`, `Trạng thái chốt BK` (`Đã chốt`, `Chưa chốt`).
+- **24 cột:** `STT`, `THAO TÁC`, `CHI TIẾT`, `ĐỢT`, `MLT`, `DANH BỘ`, `HỌ TÊN`, `ĐỊA CHỈ`, `TÌNH TRẠNG`, `NGÀY HOÀN CÔNG`, `NV THAY`, `BẢNG KÊ`, `TRỄ HẠN`, `TRỞ NGẠI`, `CS BÁO`, `CS GẮN`, `CS GỠ`, `HIỆU GẮN`, `CỠ GẮN`, `ST GẮN`, `NGÀY THAY`, `CHÌ GÓC`, `VỊ TRÍ`, `NGÀY KĐ`.
+
+### 3.2. Form `Cập nhật hoàn công` (`/HoanCongThayDHN/CapNhat/<id>`)
+- **Phần 1 — Thông tin khách hàng:** Read-only (`Ngày hoàn công`, `Ngày báo thay`, `Ngày KĐ cũ`, `MLT`, `Số BK thay`, `Chì góc`); Editable: **`Ngày thay *`** (bắt buộc), `Vị trí`.
+- **Phần 2 — Thông tin ĐHN gỡ (chốt `OPEN-05`):** **`Chỉ số gỡ *`** (bắt buộc); các trường `Số thân gỡ`, `Hiệu gỡ`, `Cỡ gỡ`, `Vị trí mới`, `Chì thân` cho phép sửa và **không bắt buộc**.
+- **Phần 3 — Thông tin ĐHN gắn (`DEC-04`):**
+  - **`Số thân gắn *`** (bắt buộc): gọi `POST /HoanCongThayDHN/LayThongTinSoThanSoChi` tra kho vật tư **`Chưa sử dụng`**. Nhập đúng → dấu `✓` xanh + tự fill `Hiệu gắn`, `Cỡ gắn`, `Ngày KĐ mới`, `Số giấy kiểm định` và tự bung combo vật tư theo cỡ; sửa sang mã khác → load lại phần ĐHN gắn vừa fill (không mất `Ngày thay`/`Chỉ số gỡ`); không tồn tại / đã sử dụng / `Tồn kho` → xóa trống phần ĐHN gắn và báo dấu `✕` đỏ.
+  - `Chỉ số gắn` (editable); **`Chì góc mới *`** (bắt buộc — tiền tố mã chì thống nhất với kho như `NBW` + số chì).
+- **Phần 4 — Vật tư sử dụng:** Tra cứu & chọn từ **29 vật tư** (tự động điền sẵn combo theo cỡ ĐHN gắn), điều chỉnh số lượng `+`/`-`.
+- **Phần 5 — Hình ảnh hoàn công:** 2 vùng riêng `Hình ảnh trước thay (0/5)` và `Hình ảnh sau thay (0/5)` (tối thiểu 1 ảnh trước + 1 ảnh sau, mỗi vùng tối đa 5 ảnh).
+
+### 3.3. Chế độ `Bảng kê` (`/hoancongthaydhn`)
+- **10 cột:** `STT`, `THAO TÁC` (`Xem chi tiết` vật tư, `Xem` chốt BK), `BẢNG KÊ`, `NGÀY LẬP BẢNG KÊ`, `SỐ LƯỢNG`, `CHƯA GIAO`, `ĐÃ THAY`, `TRỞ NGẠI`, `TRỄ HẠN`, `TRẠNG THÁI` (`Đã chốt` / `Chưa chốt`).
 
 ---
 
 ## 4. Yêu cầu chức năng (Functional Requirements)
 
-| Mã | Mô tả / Hành vi hệ thống (theo SRS V1.4) |
+| Mã | Mô tả / Hành vi hệ thống (`v1.1`) |
 |---|---|
-| `FR-33` | Bắt buộc nhập lý do hủy khi hủy hoàn công. |
-| `FR-34` | Hoàn công thay ĐHN tối thiểu phải có **1 hình trước** và **1 hình sau** hoàn công, tối đa **5 hình**. |
-| `FR-35` | Thông tin hoàn công bắt buộc nhập thông tin ĐHN gắn: `Số thân`, `Cỡ ĐHN`, `Số giấy kiểm định`, `Hiệu ĐHN`, `Chì góc`, `Chỉ số`, `Ngày kiểm định`, `Vật tư sử dụng`. |
-| `FR-36` | Thông tin ĐHN gỡ tự động load thông tin ĐHN hiện tại của danh bộ, cho phép sửa đổi. |
-| `FR-37` | Trạng thái hoàn công của một danh bộ gồm: `Đã giao`, `Hoàn công`, `Hủy`. |
+| `FR-33` | Hủy hoàn công hiển thị popup xác nhận, chuyển trạng thái về `Đã giao` và hoàn trả vật tư về `Chưa sử dụng` *(ô nhập lý do hủy chuyển sang Roadmap `v2.0`)*. |
+| `FR-34` | Hoàn công bắt buộc tối thiểu **1 ảnh trước thay** và **1 ảnh sau thay** (mỗi vùng tối đa **5 ảnh**). |
+| `FR-35` | Bắt buộc nhập `Ngày thay *`, `Chỉ số gỡ *`, `Số thân gắn *` (khớp kho `Chưa sử dụng`), `Chì góc mới *` và `Vật tư sử dụng`. |
+| `FR-36` | Tự động load thông tin ĐHN gỡ, tự động fill ĐHN gắn & combo định mức vật tư khi nhập đúng `Số thân gắn` (`DEC-04`). |
+| `FR-37` | 4 trạng thái hoàn công: `Chưa giao`, `Đã giao`, `Hoàn công`, `Đã hủy`. |
+| `FR-37A` | Chế độ `Bảng kê` hỗ trợ `In thống kê vật tư` và `Hoàn công bảng kê` (Chốt BK). |
 
 ---
 
 ## 5. Quy tắc nghiệp vụ (Business Rules)
 
-| Mã | Mô tả chi tiết (theo SRS V1.4) |
+| Mã | Mô tả chi tiết (`v1.1`) |
 |---|---|
-| `BR-25` | Khi hủy hoàn công phải có lý do hủy. |
-| `BR-26` | Chỉ cập nhật hoàn công thủ công trên Portal khi không thể hoàn công trên Mobile. |
-| `BR-27` | Khi hoàn công, bắt buộc phải ghi đầy đủ thông tin kỹ thuật ĐHN gỡ/gắn và vật tư sử dụng. |
-| `BR-28` | Hoàn công thay ĐHN tối thiểu phải có 1 hình trước và 1 hình sau hoàn công, tối đa 5 hình. |
-
-> [!CAUTION] Thiếu & Mâu thuẫn nghiêm trọng ở V1.4 — Cần rà soát (`OPEN-02`, `OPEN-05`)
-> 1. **Thiếu 100% BR/FR cho Chốt bảng kê & Thống kê vật tư:** Mục `4.6.3 (Hình 25)` có nút *Hoàn công bảng kê (Chốt bảng kê)* và *Thống kê vật tư*, nhưng không có bất kỳ `BR` hay `FR` nào quy định **điều kiện được phép chốt bảng kê** (nếu bảng kê còn dòng `Chưa thay` hoặc `Trở ngại` thì có cho chốt không? Ai có quyền chốt? Có được mở chốt không?).
-> 2. **Mâu thuẫn bắt buộc nhập ĐHN gỡ:** `BR-27` nói *bắt buộc ghi đầy đủ thông tin ĐHN gỡ/gắn*, trong khi mục `5.3` (Mobile App) lại ghi ĐHN gỡ *"có thể không điền"*.
-> 3. **Thiếu validation chỉ số & vật tư:** Chưa có rule kiểm tra `Chỉ số gỡ` (có cho nhỏ hơn chỉ số kỳ trước không?), `Chỉ số gắn` (mặc định = 0 hay cho sửa?), và kiểm tra đối chiếu `Số thân` / `Chì góc` với kho vật tư đã import.
-> 4. **Không nhất quán trạng thái `FR-37` vs mục `4.4.3`:** `FR-37` ghi 3 trạng thái (`Đã giao`, `Hoàn công`, `Hủy`), còn popup chi tiết BK ở `4.4.3` lại ghi `Chưa thay`, `Đã thay`, `Trở ngại`, `Hủy hoàn công`.
+| `BR-26` | Cập nhật hoàn công thủ công trên Portal khi không thao tác được trên Mobile. |
+| `BR-27` | *(Cập nhật chốt `OPEN-05`)* Bắt buộc nhập `Ngày thay`, `Chỉ số gỡ`, `Số thân gắn` (phải ở trạng thái **`Chưa sử dụng`**, không chấp nhận `Tồn kho` hoặc `Đã sử dụng` — `DEC-01`), `Chì góc mới` và `Vật tư sử dụng`. |
+| `BR-28` | Bắt buộc tối thiểu 1 ảnh trước và 1 ảnh sau hoàn công (mỗi vùng tối đa 5 ảnh). |
+| `BR-28A` | **Thời hạn chỉnh sửa hoàn công (`86exxta86`):** Chỉ Tổ trưởng mới được sửa sau khi NV hoàn công, và **khóa chỉnh sửa sau 5 ngày kể từ ngày hoàn công**. |
+| `BR-28B` | **Chốt bảng kê (`OPEN-02`):** Cho phép chốt bảng kê dù còn dòng `Chưa thay`/`Trở ngại` (các dòng đó tự chuyển sang `Nhắc thay tự động`). Sau khi `Đã chốt`, **khóa tuyệt đối mọi thao tác sửa/hủy hoàn công ở cả UI (icon dòng + checkbox/nút bulk) lẫn Backend**; không có chức năng Mở chốt. |
 
 ---
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-> [!WARNING] Thiếu 100% ở V1.4 — Cần bổ sung `AC-*`
-> - [ ] `AC-01` *(Đề xuất)*: Hoàn công thiếu bất kỳ trường bắt buộc nào của ĐHN gắn hoặc thiếu ảnh trước/sau đều bị chặn lưu (`FR-34`, `FR-35`).
-> - [ ] `AC-02` *(Đề xuất)*: Hủy hoàn công khi không nhập lý do bị chặn; sau khi hủy thành công, danh bộ quay lại trạng thái chưa hoàn công (`FR-33`, `BR-25`).
-> - [ ] `AC-03` *(Đề xuất)*: Sau khi chốt bảng kê (`Hình 25`), mọi thao tác cập nhật/hủy hoàn công trong bảng kê đó bị khóa.
-> - [ ] `AC-04` *(Đề xuất)*: Xuất Excel Thống kê vật tư tổng hợp đúng số lượng vật tư của các danh bộ đã hoàn công trong bảng kê.
+- [x] `AC-01`: Tìm theo `Số thân` và `Số chì` ở Tìm kiếm nâng cao trả đúng danh bộ đã hoàn công.
+- [ ] `AC-02`: Nhập `Số thân gắn` ở trạng thái `Tồn kho` hoặc `Đã sử dụng` bị từ chối (dấu `✕` đỏ, không fill thông số); nhập `Chưa sử dụng` hiện `✓` xanh + tự fill thông số & 5 vật tư combo (`DEC-01`, `DEC-04`).
+- [ ] `AC-03`: Bản ghi hoàn công quá 5 ngày bị khóa nút Sửa/Cập nhật (`BR-28A`).
+- [ ] `AC-04`: Sau khi Chốt bảng kê (`Đã chốt`), cả icon dòng, checkbox, nút bulk `Hủy` lẫn API Backend đều khóa chỉnh sửa/hủy (`BR-28B`), và dòng chưa thay xuất hiện ở `/nhacthaytudong`.
 
 ---
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-**Hình 23: MH Danh sách hoàn công**
+**Hình 1: Form Cập nhật hoàn công thay ĐHN trên Web (`v1.1`)**
 
-![Màn hình danh sách hoàn công](../assets/ui-23-danh-sach-hoan-cong.png)
+![Form cập nhật hoàn công trên Web](../assets/ui-v11-07-hoan-cong-web.png)
 
-**Hình 24: Popup cập nhật hoàn công**
+**Hình 2: Modal Chốt hoàn công bảng kê (`v1.1` — `Đã chốt hoàn công`)**
 
-![Popup cập nhật hoàn công](../assets/ui-24-popup-cap-nhat-hoan-cong.png)
-
-**Hình 25: Thống kê vật tư và chốt bảng kê**
-
-![Thống kê vật tư và chốt bảng kê](../assets/ui-25-thong-ke-vat-tu-chot-bk.png)
+![Modal chốt hoàn công bảng kê](../assets/ui-v11-07-chot-bang-ke.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
 | `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.6`; đánh dấu thiếu toàn bộ BR/FR Chốt bảng kê & Thống kê vật tư (`OPEN-02`, `OPEN-05`) |
+| `v1.1` | 2026-11-23 | nhanlt | Chốt `OPEN-02` (điều kiện Chốt BK & đổ sang Nhắc thay), `OPEN-05` (bắt buộc `Chỉ số gỡ *`), `DEC-04` (rule tra cứu `Số thân gắn` & auto-fill combo vật tư), khóa sửa sau 5 ngày (`BR-28A`); đưa lý do hủy hoàn công vào Roadmap `v2.0` |

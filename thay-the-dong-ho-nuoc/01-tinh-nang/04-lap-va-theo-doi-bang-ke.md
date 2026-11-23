@@ -1,13 +1,14 @@
-# 04. Lập & theo dõi bảng kê thay ĐHN
+# 04. Lập, Gửi duyệt & Theo dõi bảng kê thay ĐHN
 
-> **Phiên bản hiện tại:** `v1.0` · **Cập nhật lần cuối:** 2026-11-17 · **Trạng thái:** Baseline từ SRS V1.4
+> **Phiên bản hiện tại:** `v1.1` · **Cập nhật lần cuối:** 2026-11-23 · **Trạng thái:** Cập nhật theo phần mềm hiện tại (`As-Is` — nâng giới hạn `300`/BK, thêm bước `Chờ gửi` & rút từng danh bộ)
 
 ---
 
 ## 1. Mục tiêu & Tác nhân liên quan
 
-- **Mục tiêu:** Lọc các báo thay đủ điều kiện (Định kỳ hoặc Đã duyệt đối với Theo yêu cầu / Bất thường), chia thành các bảng kê (tối đa 250 danh bộ/BK), chuyển Ban Lãnh đạo duyệt và theo dõi / in / hủy bảng kê trước khi duyệt.
-- **Tác nhân liên quan:** Nhân viên Phòng QLĐHCN (`QLĐH`).
+- **Mục tiêu:** Lọc các báo thay đủ điều kiện (`Định kỳ`, `Theo yêu cầu`, `Bất thường`), chia thành các bảng kê (tối đa **300 danh bộ/BK**), lưu nháp (`Chờ gửi`), gửi duyệt lên Ban Lãnh đạo, thu hồi gửi duyệt, rút từng danh bộ khỏi bảng kê và theo dõi tiến độ thi công / vật tư sử dụng.
+- **Tác nhân liên quan:** Nhân viên Phòng QLĐHCN / Phòng Ghi thu.
+- **Routes thực tế:** `/lapbangke` (2 tab: `Lập bảng kê` & `Theo dõi bảng kê` quản lý gửi duyệt) · `/theodoilapbangke` (menu cấp 2 riêng theo dõi tiến độ & vật tư).
 - **Tham chiếu SRS V1.4:** Mục `4.3 Lập & theo dõi bảng kê thay ĐHN`.
 
 ---
@@ -18,14 +19,15 @@
 
 ![Flowchart lập bảng kê thay ĐHN](../assets/flowchart-lap-bang-ke.png)
 
-### 2.2. Diễn giải luồng chính & ngoại lệ
-1. **Tìm kiếm báo thay:** Chọn **Trường hợp thay** (`Định kỳ` / `Theo yêu cầu` / `Bất thường`), **Phòng** (`QLĐHN 1` / `QLĐHN 2`) và các bộ lọc nâng cao để lấy danh sách báo thay đủ điều kiện (sắp xếp tăng dần theo `MLT`).
-2. **Chia & Lập bảng kê:** Nhập/chọn số lượng tối đa mỗi bảng kê (≤ 250), hệ thống tự động chia thành một hoặc nhiều bảng kê và đánh số tự động theo công thức `[STT 4 số][viết tắt]/[2 số cuối năm]`.
-3. **Chuyển duyệt:** Kiểm tra danh sách bảng kê vừa chia, bấm **Chuyển duyệt** từng bảng kê hoặc **Chuyển duyệt tất cả** lên Ban Lãnh đạo; bảng kê đồng thời gắn đích giao cho Phòng QLML tương ứng (`QLĐHN 1` → `QLML 1`, `QLĐHN 2` → `QLML 2`).
-4. **Theo dõi / In / Hủy bảng kê:**
-   - Chọn nhiều bảng kê để **In bảng kê**.
-   - Click vào số bảng kê để xem chi tiết danh bộ bên trong.
-   - **Hủy bảng kê** (chỉ khi chưa được Ban Lãnh đạo duyệt, bắt buộc nhập lý do): các báo thay bên trong được trả về trạng thái chưa lập bảng kê.
+### 2.2. Diễn giải luồng chính (`v1.1`)
+1. **Tìm kiếm báo thay (`/lapbangke`):** Chọn Radio `Trường hợp thay` (`Định kỳ` / `Theo yêu cầu` / `Bất thường`), chọn `Phòng *` và các điều kiện lọc. Riêng `Định kỳ` mặc định sắp xếp **tăng dần theo `Ngày kiểm định`** (cũ nhất đi thay trước).
+2. **Chia & Lưu bảng kê (`Chờ gửi`):** Chọn danh bộ → mở modal `Danh sách bảng kê chuyển duyệt`, nhập số dòng tối đa/BK (≤ **`300`**, `DEC-05`), `Phòng QLML` tự khóa tương ứng với `Phòng Ghi thu` → bấm `Chia Bảng Kê` để tự sinh mã BK (`XXXXDK/26`, `XXXXYC/26`, `XXXXBT/26`) → bấm `Lưu chờ duyệt` tạo bảng kê ở trạng thái **`Chờ gửi`**.
+3. **Gửi duyệt & Thu hồi gửi duyệt (`/lapbangke` → tab `Theo dõi bảng kê`):**
+   - Bấm **`Gửi duyệt bảng kê`** → bảng kê chuyển từ `Chờ gửi` sang **`Chưa duyệt`** (lên màn hình duyệt của Ban Lãnh đạo).
+   - Khi BLĐ chưa duyệt, người lập có thể bấm **`Hủy gửi duyệt bảng kê`** để thu hồi về `Chờ gửi`, hoặc bấm **`Hủy bảng kê`**.
+4. **Rút từng danh bộ & Theo dõi tiến độ (`/theodoilapbangke` & `/LapBangKe/xem-chi-tiet/<id>`):**
+   - Click link `Số bảng kê` mở trang chi tiết có nút **`Hủy báo thay`** cho từng danh bộ (hoặc bulk) để rút khỏi bảng kê.
+   - Bấm `Xem chi tiết` mở modal **`DANH SÁCH VẬT TƯ SỬ DỤNG`** của bảng kê; xem 6 cột tiến độ (`CHƯA GIAO`, `ĐÃ THAY`, `CHƯA THAY`, `TRỞ NGẠI`, `HỦY HOÀN CÔNG`, `TRỄ HẠN`), In bảng kê và Xuất Excel.
 
 ### 2.3. Sequence Diagram
 
@@ -35,99 +37,69 @@
 
 ## 3. Đặc tả màn hình & Trường dữ liệu
 
-### 3.1. Bộ lọc tìm kiếm (Màn hình Lập bảng kê)
+### 3.1. Bộ lọc tìm kiếm (`/lapbangke`)
+- **`Định kỳ`:**
+  - *Cơ bản:* `Phòng *` (`Phòng Quản lý ghi thu 1/2`), `Điều kiện lọc *` (`Ngày gắn`, `Ngày kiểm định` [mặc định], `Danh bạ thiếu`, `Theo hiệu`), `Tổ ghi thu` (7 tổ), `Công thức tính *` (`>`, `<`, `>=`, `<=` [mặc định], `=`), `Năm *` (`2017–2026`), `Kỳ` (`1–12`), `Đợt` (`01–12`), `Cỡ ĐH` (14 cỡ), `Danh bộ`.
+  - *Nâng cao:* `Hiệu ĐH` (20 hiệu), `Số kỳ không tiêu thụ` (mặc định `6`).
+- **`Theo yêu cầu`:** `Loại báo thay *` (multi-select 22 loại kèm badge số lượng tồn), `Phòng *`, `Tổ ghi thu`, `Thời gian tạo báo thay`, `Cỡ ĐH`, `Danh bộ`, `Hiệu ĐH`.
+- **`Bất thường`:** `Code` (6 mã `60–65`), `Phòng *`, `Tổ ghi thu`, `Năm`, `Kỳ`, `Đợt`, `Cỡ`, `Danh bộ`, `Hiệu ĐH`.
 
-**Tìm kiếm cơ bản:**
-
-| Trường | Kiểu | Bắt buộc | Mô tả (theo V1.4) | Điểm cần bổ sung / Đối chiếu |
-|---|---|---|---|---|
-| Trường hợp thay | Dropdown | **Có** | `Định kỳ`, `Theo yêu cầu`, `Bất thường` | — |
-| Điều kiện lọc (định kỳ) | Dropdown | Khi chọn `Định kỳ` | `Ngày gắn`, `Ngày kiểm định`, `Danh bạ thiếu`, `Theo hiệu` | **Thiếu công thức/logic lọc chi tiết** cho từng option |
-| Phòng | Dropdown | **Có** | `Phòng QLĐHN 1`, `Phòng QLĐHN 2` | — |
-| *(Công thức tính)* | *(Không có trong bảng UI)* | *(Theo `FR-LBK-04`)* | `FR-LBK-04` yêu cầu bắt buộc chọn `Công thức tính` | > [!CAUTION] Lệch giữa bảng UI `4.3.3` và `FR-LBK-04` |
-| *(Năm)* | *(Không có trong bảng UI)* | *(Theo `FR-LBK-04`)* | `FR-LBK-04` yêu cầu bắt buộc chọn `Năm` | > [!CAUTION] Lệch giữa bảng UI `4.3.3` và `FR-LBK-04` |
-
-**Tìm kiếm nâng cao:**
-
-| Trường | Kiểu | Mô tả (theo V1.4) |
-|---|---|---|
-| Tổ | Dropdown | Chọn tổ quản lý ĐHN |
-| Loại báo thay | Dropdown | Chọn loại báo thay theo yêu cầu (22 loại) |
-| Code | Dropdown | `60`, `61`, `62`, `63`, `64`, `66` *(lệch với `60, 61` ở mục `4.2.3`)* |
-| Hiệu | Dropdown | Hiệu ĐHN hiện tại của danh bộ |
-| Cỡ | Dropdown | Cỡ ĐHN hiện tại của danh bộ |
-
-### 3.2. Màn hình Theo dõi trạng thái bảng kê đã chuyển
-
-| Thành phần | Kiểu | Mô tả |
-|---|---|---|
-| In bảng kê | Button | Chọn 1 hoặc nhiều bảng kê và xuất/in *(V1.4 thiếu mẫu biểu In bảng kê)* |
-| Hủy | Button | Hủy bảng kê đã chọn, bắt buộc nhập lý do (`BR-LBK-08`, `FR-LBK-05`) |
-| Chọn bảng kê | Link | Nhấn vào số bảng kê để xem danh sách danh bộ thuộc bảng kê |
+### 3.2. Màn hình Theo dõi lập bảng kê (`/theodoilapbangke`)
+- **Bộ lọc:** `Số bảng kê`, `Trường hợp thay` (`01 - Thay định kỳ`, `02 - Thay theo yêu cầu`, `03 - Thay bất thường`), `Loại báo thay`, `Trạng thái phê duyệt` (`Chờ gửi`, `Chưa duyệt`, `Đã duyệt`, `Đã hủy`, `Trả về`), `Ngày bảng kê`, `Ngày duyệt`, `Phòng` (`QLML 1/2`), `Danh bộ`.
+- **18 cột:** `Checkbox`, `STT`, `THAO TÁC` (`In bảng kê`, `Xuất excel bảng kê`, `Xem chi tiết` vật tư), `PHÒNG BAN`, `SỐ BẢNG KÊ` (link chi tiết), `NGƯỜI LẬP`, `NGÀY LẬP BK`, `NGÀY XỬ LÝ`, `LOẠI BK`, `SỐ LƯỢNG`, `CHƯA GIAO`, `ĐÃ THAY`, `CHƯA THAY`, `TRỞ NGẠI`, `HỦY HOÀN CÔNG`, `TRỄ HẠN`, `PHÊ DUYỆT`, `GHI CHÚ`.
 
 ---
 
 ## 4. Yêu cầu chức năng (Functional Requirements)
 
-| Mã | Mô tả / Hành vi hệ thống (theo SRS V1.4) |
+| Mã | Mô tả / Hành vi hệ thống (`v1.1`) |
 |---|---|
-| `FR-LBK-01` | Chỉ báo thay **đã được duyệt** mới được hiển thị và tìm kiếm tại màn hình Lập bảng kê, ngoại trừ báo thay **định kỳ** không yêu cầu duyệt. |
-| `FR-LBK-02` | Danh sách báo thay sau khi tìm kiếm sắp xếp theo thứ tự **tăng dần của MLT**. |
-| `FR-LBK-03` | Filter điều kiện lọc (định kỳ) gồm: `Ngày gắn`, `Ngày kiểm định`, `Danh bạ thiếu`, `Theo hiệu`. |
-| `FR-LBK-04` | Bắt buộc chọn `Điều kiện lọc`, `Phòng`, `Công thức tính`, `Năm` trước khi lọc để lập bảng kê. *(Xem cảnh báo lệch UI ở mục 3.1)* |
-| `FR-LBK-05` | Khi hủy bảng kê, bắt buộc nhập lý do hủy. |
-| `FR-LBK-06` | Sau khi lập, cho phép nhấn vào số bảng kê để xem chi tiết các báo thay bên trong. |
-| `FR-LBK-07` | Tự động tạo số bảng kê theo công thức: `[STT 4 chữ số][viết tắt trường hợp thay]/[2 số cuối năm lập BK]`. VD: `0001DK/26`. |
-| `FR-LBK-08` | Cho phép chọn số lượng báo thay tối đa mỗi bảng kê khi chia; không được vượt quá **250 báo thay/bảng kê**. |
-| `FR-LBK-09` | Khi hủy bảng kê, hiển thị popup xác nhận trước khi thực hiện. |
+| `FR-LBK-01` | Chỉ báo thay đã duyệt đủ cấp mới hiển thị tại màn hình Lập bảng kê (ngoại trừ `Định kỳ` không cần duyệt). |
+| `FR-LBK-02` | Danh sách `Định kỳ` sắp xếp mặc định theo **`Ngày kiểm định` tăng dần** (cũ nhất đi thay trước). |
+| `FR-LBK-03`, `FR-LBK-04` | Bộ lọc `Định kỳ` bắt buộc `Phòng`, `Điều kiện lọc`, `Công thức tính`, `Năm`; hỗ trợ lọc loại trừ `Số kỳ không tiêu thụ`. |
+| `FR-LBK-05`, `FR-LBK-09` | Hủy bảng kê (khi chưa duyệt) yêu cầu popup xác nhận và lý do hủy. |
+| `FR-LBK-06` | Click `Số bảng kê` mở `/LapBangKe/xem-chi-tiet/<id>` xem danh bộ, lọc nhanh theo trạng thái, xuất Excel và **`Hủy báo thay`** từng danh bộ. |
+| `FR-LBK-07`, `FR-LBK-08` | Tự động sinh số bảng kê (`[STT 4 số][DK/YC/BT]/[YY]`); giới hạn chia tối đa **`300` danh bộ/BK**. |
+| `FR-LBK-10` | Lưu bảng kê ở trạng thái `Chờ gửi`, hỗ trợ `Gửi duyệt bảng kê` (→ `Chưa duyệt`) và `Hủy gửi duyệt bảng kê` (thu hồi về `Chờ gửi`). |
+| `FR-LBK-11` | Xem tổng hợp `DANH SÁCH VẬT TƯ SỬ DỤNG` theo bảng kê từ màn hình `/theodoilapbangke`. |
 
 ---
 
 ## 5. Quy tắc nghiệp vụ (Business Rules)
 
-| Mã | Mô tả chi tiết (theo SRS V1.4) |
+| Mã | Mô tả chi tiết (`v1.1`) |
 |---|---|
-| `BR-LBK-01` | Chỉ báo thay đã được duyệt mới được phép lập bảng kê. Ngoại lệ: báo thay định kỳ không cần bước duyệt. |
-| `BR-LBK-02` | Mỗi bảng kê chỉ bao gồm các báo thay thuộc **cùng một Phòng QLĐHN**. |
-| `BR-LBK-03` | Khi bảng kê **đã được Ban lãnh đạo duyệt**, hệ thống không cho phép hủy bảng kê. |
-| `BR-LBK-04` | Mỗi bảng kê chỉ bao gồm **một trường hợp thay duy nhất** (`Định kỳ`, `Theo yêu cầu` hoặc `Bất thường`). |
-| `BR-LBK-05` | Đối với bảng kê thay theo yêu cầu, mỗi bảng kê chỉ bao gồm **một loại báo thay duy nhất**. |
-| `BR-LBK-06` | Đối với bảng kê thay bất thường, mỗi bảng kê chỉ bao gồm **một code duy nhất**. |
-| `BR-LBK-07` | Có thể tùy chỉnh số lượng chia bảng kê; số lượng tối đa của mỗi bảng kê là **250**. |
+| `BR-LBK-01` – `BR-LBK-06` | Chỉ báo thay đã duyệt (trừ Định kỳ) mới lập BK; cùng 1 Phòng, cùng 1 Trường hợp thay, cùng 1 Loại báo thay/Code; BK đã duyệt không được hủy. |
+| `BR-LBK-07` | Số lượng tối đa mỗi bảng kê là **`300` danh bộ** *(nâng từ `250` theo yêu cầu khách hàng — `DEC-05`)*. |
 | `BR-LBK-08` | Khi hủy bảng kê, bắt buộc nhập lý do hủy. |
-
-> [!WARNING] Thiếu đặc tả ở V1.4 — Các nghiệp vụ quan trọng chưa có
-> 1. **Rút từng báo thay khỏi bảng kê:** V1.4 chỉ có thao tác hủy **cả** bảng kê, chưa có chức năng rút/bổ sung từng danh bộ khi bảng kê bị trả về hoặc trước khi giao thi công.
-> 2. **Bảng kê bị BLĐ trả về (`Trả về`):** Ở mục `4.4` có trạng thái `Trả về` nhưng mục `4.3` không mô tả người lập bảng kê sửa và gửi duyệt lại bảng kê bị trả về bằng nút nào.
-> 3. **Quy ước viết tắt mã BK (`FR-LBK-07`):** Chưa ghi rõ viết tắt của *Theo yêu cầu* và *Bất thường* (VD: `DK`, `YC`, `BT`?) và quy tắc reset STT sang năm mới.
+| `BR-LBK-09` | Khi lập bảng kê, hệ thống tự động khóa `Phòng QLML` tiếp nhận tương ứng với `Phòng Ghi thu` (`Phòng 1` → `QLML 1`, `Phòng 2` → `QLML 2`). |
 
 ---
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-> [!WARNING] Thiếu 100% ở V1.4 — Cần bổ sung `AC-*`
-> - [ ] `AC-01` *(Đề xuất)*: Khi chia danh sách 600 danh bộ với định mức `250`, hệ thống tạo ra 3 bảng kê (`250 + 250 + 100`) và đánh số liên tiếp theo đúng format `FR-LBK-07`.
-> - [ ] `AC-02` *(Đề xuất)*: Nhập số lượng chia `> 250` hoặc `<= 0` bị chặn và báo lỗi.
-> - [ ] `AC-03` *(Đề xuất)*: Không thể chọn gộp báo thay thuộc 2 phòng khác nhau, 2 trường hợp thay khác nhau, 2 loại yêu cầu khác nhau hoặc 2 code khác nhau vào cùng 1 bảng kê (`BR-LBK-02`, `04`, `05`, `06`).
-> - [ ] `AC-04` *(Đề xuất)*: Hủy bảng kê chưa duyệt khi chưa nhập lý do bị chặn; sau khi hủy thành công, các báo thay bên trong quay về danh sách chờ lập bảng kê.
-> - [ ] `AC-05` *(Đề xuất)*: Bảng kê đã được BLĐ duyệt không hiển thị/vô hiệu hóa nút Hủy (`BR-LBK-03`).
+- [x] `AC-01`: Lọc `Định kỳ` sắp xếp đúng theo `Ngày kiểm định` tăng dần.
+- [x] `AC-02`: Chia bảng kê cho phép tối đa `300` dòng/BK và tự sinh mã `XXXXDK/26`.
+- [x] `AC-03`: Lưu bảng kê vào trạng thái `Chờ gửi`; bấm `Gửi duyệt` chuyển sang `Chưa duyệt` và hiện nút `Hủy gửi duyệt bảng kê`.
+- [x] `AC-04`: Trong màn chi tiết bảng kê, có thể rút/hủy từng danh bộ và xem tổng hợp vật tư sử dụng tại `/theodoilapbangke`.
 
 ---
 
 ## 7. Giao diện (UI) & Lịch sử thay đổi
 
-**Hình 13: MH Lập bảng kê**
+**Hình 1: Modal chia bảng kê tối đa 300 dòng/BK (`v1.1`)**
 
-![Màn hình lập bảng kê](../assets/ui-13-lap-bang-ke.png)
+![Modal chia bảng kê tối đa 300 dòng](../assets/ui-v11-04-lap-bang-ke-300.png)
 
-**Hình 14: Danh sách bảng kê chuyển duyệt**
+**Hình 2: Tab Theo dõi bảng kê — Gửi duyệt & Hủy gửi duyệt (`v1.1`)**
 
-![Danh sách bảng kê chuyển duyệt](../assets/ui-14-ds-bang-ke-chuyen-duyet.png)
+![Gửi duyệt bảng kê](../assets/ui-v11-04-gui-duyet-bang-ke.png)
 
-**Hình 15: Màn hình theo dõi trạng thái duyệt bảng kê đã chuyển**
+**Hình 3: Chi tiết bảng kê — Rút từng danh bộ (`v1.1`)**
 
-![Màn hình theo dõi trạng thái duyệt bảng kê](../assets/ui-15-theo-doi-bang-ke.png)
+![Chi tiết bảng kê hỗ trợ hủy từng danh bộ](../assets/ui-v11-04-rut-danh-bo.png)
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
 | `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.3`; gắn note lệch `FR-LBK-04` vs UI, thiếu công thức lọc & luồng sửa BK trả về |
+| `v1.1` | 2026-11-23 | nhanlt | Nâng giới hạn lên `300` dòng/BK (`DEC-05`); cập nhật bước `Chờ gửi` → `Gửi duyệt` / `Hủy gửi duyệt`, sắp xếp `Ngày KĐ` tăng dần, chức năng rút từng danh bộ và tách màn `/theodoilapbangke` |
