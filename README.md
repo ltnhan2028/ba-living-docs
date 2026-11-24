@@ -12,10 +12,11 @@
 | 2 | **Thay thế ĐHN** | Lập kế hoạch, chốt chỉ số đồng hồ cũ và lắp đặt đồng hồ thay thế | [Mở tài liệu](thay-the-dong-ho-nuoc/00-tong-quan.md) |
 | 3 | **Ghi thu tiền nước** | Ghi chỉ số định kỳ, tính sản lượng/hóa đơn và thu tiền nước | [Mở tài liệu](ghi-thu-tien-nuoc/00-tong-quan.md) |
 
-## Quy ước cấu trúc mỗi dự án
+## Quy ước cấu trúc mỗi dự án (Chuẩn 5 chương IEEE 830 / ISO 29148)
 
-Mỗi dự án bên trong đều đi theo một bộ khung thống nhất:
-- `00-tong-quan.md`: Mục tiêu, phạm vi và các vai trò liên quan.
-- `01-tinh-nang/`: Chi tiết từng tính năng (Flow, Business Rules, Acceptance Criteria, UI, Version History).
-- `02-quy-tac-chung.md`: Các quy tắc dùng chung xuyên suốt dự án.
-- `03-nhat-ky-chot.md`: Nhật ký các quyết định nghiệp vụ đã chốt (`DEC-*`).
+Mỗi dự án bên trong đi theo bộ khung thống nhất 5 chương (xem chi tiết tại `AGENTS.md`):
+- **Chương 1 — Tổng quan (`00-tong-quan.md`):** Mục tiêu, phạm vi, ranh giới tích hợp, Glossary, RBAC Matrix và sơ đồ tổng quan.
+- **Chương 2 — Dữ liệu & Tích hợp (`02-quy-tac-chung.md`, `04-tich-hop-api.md`):** Quy tắc dùng chung, Data Dictionary, Master Data và đặc tả tích hợp API.
+- **Chương 3 — Đặc tả chức năng (`01-tinh-nang/`):** Chi tiết từng tính năng theo khung 7 phần (`Flow`, `UI/Fields`, `FR-*`, `BR-*`, `AC-*`, `UI`, `Lịch sử thay đổi`).
+- **Chương 4 — Yêu cầu phi chức năng (`05-yeu-cau-phi-chuc-nang.md`):** Hiệu năng, tải đồng thời, Mobile Offline, lưu trữ ảnh và bảo mật/Audit.
+- **Chương 5 — Phụ lục & Quản trị thay đổi (`06-diem-thieu-va-mau-thuan.md`, `03-nhat-ky-chot.md`):** Bảng `GAP-*`, nhật ký quyết định nghiệp vụ (`DEC-*`), danh sách **TBD List (`TBD-*`)** và Roadmap `v2.0` (`RM-*`).

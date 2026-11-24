@@ -38,7 +38,7 @@
 
 ### 3.2. Màn hình `Cập nhật hoàn công thay`
 - **Phần 1 — Card Thông tin danh bộ (collapsible):** `Danh bộ`, `Tên chủ hộ`, `Số điện thoại`, `Số hợp đồng`, `Mã lộ trình`, `Nhân viên đọc số`, `Số điện thoại NV`, `Địa chỉ` (+ icon bản đồ), `Số lần trở ngại`, 2 badge trạng thái + nút **`Báo cáo trở ngại`**.
-- **Phần 2 — `Thông tin ĐHN gỡ` (chốt `OPEN-05`):** `Hiệu ĐHN`, `Cỡ` (auto-fill), `Số thân`, **`Chỉ số` (bắt buộc — bỏ trống báo `"Vui lòng nhập chỉ số gỡ"`)**, `Chì thân` (mặc định `0`).
+- **Phần 2 — `Thông tin ĐHN gỡ` (chốt `TBD-05` / `DEC-05`):** `Hiệu ĐHN`, `Cỡ` (auto-fill), `Số thân`, **`Chỉ số` (bắt buộc — bỏ trống báo `"Vui lòng nhập chỉ số gỡ"`)**, `Chì thân` (mặc định `0`).
 - **Phần 3 — `Thông tin ĐHN gắn`:** `Số thân` (nhập đúng kho `Chưa sử dụng` hiện `✓` xanh + tự fill `Cỡ`, `Số giấy kiểm định`, `Hiệu ĐHN`, `Ngày kiểm định`), `Chỉ số`, `Mã chì` (mặc định `NBW`), `Số chì`, `Ngày thay` (mặc định ngày hiện tại `dd/MM/yyyy`).
 - **Phần 4 — `Vật tư sử dụng`:** **Tự động điền sẵn combo định mức vật tư theo cỡ ĐHN gắn** (vd: Cỡ 50 tự điền 5 vật tư `Dây thép`, `Chì nhựa`, `ĐHN 50 ly`, `Joint Kiềng Ø40`, `Bulon inox 304`); cho phép chỉnh số lượng, xóa hoặc bấm `+ Thêm vật tư sử dụng`.
 - **Phần 5 — `Thông tin khác`:** `Ghi chú`, **`Trước thay 0/5`** (tối thiểu 1 ảnh, tối đa 5 ảnh), **`Sau thay 0/5`** (tối thiểu 1 ảnh — thiếu báo `"Hãy chọn hình ảnh sau thay"`, tối đa 5 ảnh).
@@ -68,20 +68,20 @@
 | Mã | Mô tả chi tiết (`v1.1`) |
 |---|---|
 | `BR-MOB-01` | Nhân viên chỉ thấy và thao tác trên các danh bộ được giao cho chính mình. |
-| `BR-MOB-02` | Hoàn công bắt buộc nhập **`Chỉ số gỡ`**, **`Số thân` ĐHN gắn** (thuộc kho `Chưa sử dụng`), **`Chì góc`**, tối thiểu **1 ảnh Trước thay** và **1 ảnh Sau thay** *(đóng `OPEN-05`)*. |
+| `BR-MOB-02` | Hoàn công bắt buộc nhập **`Chỉ số gỡ`**, **`Số thân` ĐHN gắn** (thuộc kho `Chưa sử dụng` — `DEC-03`), **`Chì góc`**, tối thiểu **1 ảnh Trước thay** và **1 ảnh Sau thay** *(đóng `TBD-05` / `DEC-05`)*. |
 | `BR-MOB-03` | Báo cáo trở ngại bắt buộc chọn **1 trong 26 lý do** và tối thiểu **1 hình ảnh** (không bắt buộc ghi chú). |
 
-> [!WARNING] Điểm mở còn lại cho Phase sau (`OPEN-08`)
-> Cơ chế làm việc khi mất mạng (**Offline Mode** lưu tạm hàng đợi gửi lại) và xử lý xung đột khi Web thu hồi phân công lúc Mobile đang ngoại tuyến sẽ tiếp tục rà soát ở `OPEN-08`.
+> [!WARNING] Hạng mục TBD còn lại cho Phase sau (`TBD-08`)
+> Cơ chế làm việc khi mất mạng (**Offline Mode** lưu tạm hàng đợi gửi lại) và xử lý xung đột khi Web thu hồi phân công lúc Mobile đang ngoại tuyến sẽ tiếp tục rà soát ở `TBD-08`.
 
 ---
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [x] `AC-01`: Giao 2 danh bộ từ Web (`/giaonvthaydhn`) → xuất hiện ngay trên Mobile của nhân viên đúng tab `Định kỳ`, sắp xếp tăng dần theo `MLT`.
-- [x] `AC-02`: Bấm `Cập nhật` khi bỏ trống `Chỉ số gỡ` báo `"Vui lòng nhập chỉ số gỡ"`; thiếu ảnh sau thay báo `"Hãy chọn hình ảnh sau thay"`.
-- [x] `AC-03`: Nhập `Số thân` ĐHN `Chưa sử dụng` (`V03472`, Cỡ 50) hiện `✓` xanh, auto-fill 4 thông số và tự điền 5 vật tư định mức → gửi hoàn công thành công (`"Đã cập nhật hoàn công"`) và đồng bộ tức thì lên Portal + khóa vật tư kho.
-- [x] `AC-04`: Báo trở ngại thiếu ảnh báo `"Hãy chọn hình ảnh"`; chọn ảnh từ Thư viện & gửi thành công → đồng bộ ngay về đúng tab phòng ban trên `/xulytrongai`.
+- [x] `AC-MOB-01`: Giao 2 danh bộ từ Web (`/giaonvthaydhn`) → xuất hiện ngay trên Mobile của nhân viên đúng tab `Định kỳ`, sắp xếp tăng dần theo `MLT`.
+- [x] `AC-MOB-02`: Bấm `Cập nhật` khi bỏ trống `Chỉ số gỡ` báo `"Vui lòng nhập chỉ số gỡ"`; thiếu ảnh sau thay báo `"Hãy chọn hình ảnh sau thay"`.
+- [x] `AC-MOB-03`: Nhập `Số thân` ĐHN `Chưa sử dụng` (`V03472`, Cỡ 50) hiện `✓` xanh, auto-fill 4 thông số và tự điền 5 vật tư định mức → gửi hoàn công thành công (`"Đã cập nhật hoàn công"`) và đồng bộ tức thì lên Portal + khóa vật tư kho.
+- [x] `AC-MOB-04`: Báo trở ngại thiếu ảnh báo `"Hãy chọn hình ảnh"`; chọn ảnh từ Thư viện & gửi thành công → đồng bộ ngay về đúng tab phòng ban trên `/xulytrongai`.
 
 ---
 
@@ -101,5 +101,5 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 chương `V`; đánh dấu thiếu toàn bộ BR/FR/AC, Offline mode & mâu thuẫn ĐHN gỡ (`OPEN-05`, `OPEN-08`) |
-| `v1.1` | 2026-11-23 | nhanlt | Bổ sung đầy đủ đặc tả thực tế Mobile App (`FR-MOB-01..05`, `BR-MOB-01..03`, `AC-01..04`): 3 tab `Định kỳ/Hư hỏng/Theo đơn`, bộ lọc chi tiết, tự điền combo vật tư theo cỡ ĐHN, validate `Chỉ số gỡ` & ảnh trước/sau/trở ngại (Camera + Thư viện) |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 chương `V`; đánh dấu thiếu toàn bộ BR/FR/AC, Offline mode & mâu thuẫn ĐHN gỡ (`TBD-05`, `TBD-08`) |
+| `v1.1` | 2026-11-23 | nhanlt | Bổ sung đầy đủ đặc tả thực tế Mobile App (`FR-MOB-01..05`, `BR-MOB-01..03`, `AC-MOB-01..04`): 3 tab `Định kỳ/Hư hỏng/Theo đơn`, bộ lọc chi tiết, tự điền combo vật tư theo cỡ ĐHN, validate `Chỉ số gỡ` & ảnh trước/sau/trở ngại (Camera + Thư viện) |

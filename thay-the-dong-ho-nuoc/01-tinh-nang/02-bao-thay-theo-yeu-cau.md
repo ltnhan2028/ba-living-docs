@@ -102,11 +102,11 @@
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [x] `AC-01`: Danh bộ đã có báo thay chưa hoàn tất bị ẩn nút Tạo báo thay (`FR-YC-03`).
-- [x] `AC-02`: Tạo báo thay thiếu `Loại báo thay` báo lỗi `"Vui lòng nhập loại báo thay"`.
-- [x] `AC-03`: Bấm `Duyệt >>` khi chưa có hình/file bị chặn; sau khi upload ảnh ở `/ViewImages` thì duyệt thành công.
-- [x] `AC-04`: Tạo báo thay theo yêu cầu cho danh bộ Định kỳ đang giao NV hiện cảnh báo PQLML; chọn `Tiếp tục` thì tự động đổi dòng Định kỳ trong BK cũ sang `Hủy`.
-- [x] `AC-05`: Bấm `Trả về` để trống lý do bị chặn; nhập lý do trả về thành công thì bản ghi chuyển sang `Trả về` trên `/baothaytheodon` và cho phép Sửa/Xóa.
+- [x] `AC-YC-01`: Danh bộ đã có báo thay chưa hoàn tất bị ẩn nút Tạo báo thay (`FR-YC-03`).
+- [x] `AC-YC-02`: Tạo báo thay thiếu `Loại báo thay` báo lỗi `"Vui lòng nhập loại báo thay"`.
+- [x] `AC-YC-03`: Bấm `Duyệt >>` khi chưa có hình/file bị chặn; sau khi upload ảnh ở `/ViewImages` thì duyệt thành công.
+- [x] `AC-YC-04`: Tạo báo thay theo yêu cầu cho danh bộ Định kỳ đang giao NV hiện cảnh báo PQLML; chọn `Tiếp tục` thì tự động đổi dòng Định kỳ trong BK cũ sang `Hủy`.
+- [x] `AC-YC-05`: Bấm `Trả về` để trống lý do bị chặn; nhập lý do trả về thành công thì bản ghi chuyển sang `Trả về` trên `/baothaytheodon` và cho phép Sửa/Xóa.
 
 ---
 

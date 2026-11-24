@@ -68,9 +68,9 @@
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [x] `AC-01`: Popup giao NV của bảng kê thuộc Phòng QLML 1 chỉ hiển thị nhân viên thuộc QLML 1.
-- [x] `AC-02`: Giao thành công → `CHƯA GIAO` giảm tương ứng, bản ghi xuất hiện ở tab `Danh sách đã giao` và đồng bộ lên Mobile App của nhân viên được giao.
-- [x] `AC-03`: Danh bộ đã báo trở ngại hoặc thuộc bảng kê `Đã chốt` bị khóa checkbox và ẩn icon `Hủy giao` (`BR-GNV-06`).
+- [x] `AC-GNV-01`: Popup giao NV của bảng kê thuộc Phòng QLML 1 chỉ hiển thị nhân viên thuộc QLML 1.
+- [x] `AC-GNV-02`: Giao thành công → `CHƯA GIAO` giảm tương ứng, bản ghi xuất hiện ở tab `Danh sách đã giao` và đồng bộ lên Mobile App của nhân viên được giao.
+- [x] `AC-GNV-03`: Danh bộ đã báo trở ngại hoặc thuộc bảng kê `Đã chốt` bị khóa checkbox và ẩn icon `Hủy giao` (`BR-GNV-06`).
 
 ---
 

@@ -1,6 +1,6 @@
 # 07. Danh sách hoàn công, Thống kê vật tư & Chốt bảng kê
 
-> **Phiên bản hiện tại:** `v1.1` · **Cập nhật lần cuối:** 2026-11-23 · **Trạng thái:** Cập nhật theo phần mềm hiện tại (`As-Is` — chốt `OPEN-02`, `OPEN-05`, `DEC-04` & khóa sửa 5 ngày)
+> **Phiên bản hiện tại:** `v1.1` · **Cập nhật lần cuối:** 2026-11-23 · **Trạng thái:** Cập nhật theo phần mềm hiện tại (`As-Is` — chốt `TBD-02`, `TBD-05`, `DEC-05` & khóa sửa 5 ngày)
 
 ---
 
@@ -30,7 +30,7 @@
 3. **Thống kê vật tư & Chốt bảng kê (`/hoancongthaydhn` — chế độ `Bảng kê`):**
    - Bấm `Xem chi tiết` → mở modal **`DANH SÁCH VẬT TƯ SỬ DỤNG`** kèm nút `In thống kê vật tư`.
    - Bấm `Xem` → mở modal **`CHỐT HOÀN CÔNG BẢNG KÊ`** (chia 3 nhóm: *Đã hoàn công*, *Trở ngại*, *Chưa thay*) → bấm **`Hoàn công bảng kê`** để chốt sang trạng thái **`Đã chốt`**.
-   - **Quy tắc chốt bảng kê (`OPEN-02` đã chốt):** Hệ thống **cho phép chốt bảng kê ngay cả khi vẫn còn danh bộ `Chưa thay` / `Trở ngại`**; các danh bộ chưa thay sau khi chốt sẽ tự động đổ sang màn hình **`Nhắc thay tự động`** (`/nhacthaytudong`) để lập bảng kê đợt sau. Không có nút `Mở chốt`, và **mọi thao tác sửa/hủy hoàn công (cả icon dòng lẫn nút bulk) đều phải bị khóa** sau khi chốt.
+   - **Quy tắc chốt bảng kê (`TBD-02` / `DEC-05` đã chốt):** Hệ thống **cho phép chốt bảng kê ngay cả khi vẫn còn danh bộ `Chưa thay` / `Trở ngại`**; các danh bộ chưa thay sau khi chốt sẽ tự động đổ sang màn hình **`Nhắc thay tự động`** (`/nhacthaytudong`) để lập bảng kê đợt sau. Không có nút `Mở chốt`, và **mọi thao tác sửa/hủy hoàn công (cả icon dòng lẫn nút bulk) đều phải bị khóa** sau khi chốt.
 
 ### 2.3. Sequence Diagram
 
@@ -47,8 +47,8 @@
 
 ### 3.2. Form `Cập nhật hoàn công` (`/HoanCongThayDHN/CapNhat/<id>`)
 - **Phần 1 — Thông tin khách hàng:** Read-only (`Ngày hoàn công`, `Ngày báo thay`, `Ngày KĐ cũ`, `MLT`, `Số BK thay`, `Chì góc`); Editable: **`Ngày thay *`** (bắt buộc), `Vị trí`.
-- **Phần 2 — Thông tin ĐHN gỡ (chốt `OPEN-05`):** **`Chỉ số gỡ *`** (bắt buộc); các trường `Số thân gỡ`, `Hiệu gỡ`, `Cỡ gỡ`, `Vị trí mới`, `Chì thân` cho phép sửa và **không bắt buộc**.
-- **Phần 3 — Thông tin ĐHN gắn (`DEC-04`):**
+- **Phần 2 — Thông tin ĐHN gỡ (chốt `TBD-05` / `DEC-05`):** **`Chỉ số gỡ *`** (bắt buộc); các trường `Số thân gỡ`, `Hiệu gỡ`, `Cỡ gỡ`, `Vị trí mới`, `Chì thân` cho phép sửa và **không bắt buộc**.
+- **Phần 3 — Thông tin ĐHN gắn (`DEC-05`):**
   - **`Số thân gắn *`** (bắt buộc): gọi `POST /HoanCongThayDHN/LayThongTinSoThanSoChi` tra kho vật tư **`Chưa sử dụng`**. Nhập đúng → dấu `✓` xanh + tự fill `Hiệu gắn`, `Cỡ gắn`, `Ngày KĐ mới`, `Số giấy kiểm định` và tự bung combo vật tư theo cỡ; sửa sang mã khác → load lại phần ĐHN gắn vừa fill (không mất `Ngày thay`/`Chỉ số gỡ`); không tồn tại / đã sử dụng / `Tồn kho` → xóa trống phần ĐHN gắn và báo dấu `✕` đỏ.
   - `Chỉ số gắn` (editable); **`Chì góc mới *`** (bắt buộc — tiền tố mã chì thống nhất với kho như `NBW` + số chì).
 - **Phần 4 — Vật tư sử dụng:** Tra cứu & chọn từ **29 vật tư** (tự động điền sẵn combo theo cỡ ĐHN gắn), điều chỉnh số lượng `+`/`-`.
@@ -66,7 +66,7 @@
 | `FR-33` | Hủy hoàn công hiển thị popup xác nhận, chuyển trạng thái về `Đã giao` và hoàn trả vật tư về `Chưa sử dụng` *(ô nhập lý do hủy chuyển sang Roadmap `v2.0`)*. |
 | `FR-34` | Hoàn công bắt buộc tối thiểu **1 ảnh trước thay** và **1 ảnh sau thay** (mỗi vùng tối đa **5 ảnh**). |
 | `FR-35` | Bắt buộc nhập `Ngày thay *`, `Chỉ số gỡ *`, `Số thân gắn *` (khớp kho `Chưa sử dụng`), `Chì góc mới *` và `Vật tư sử dụng`. |
-| `FR-36` | Tự động load thông tin ĐHN gỡ, tự động fill ĐHN gắn & combo định mức vật tư khi nhập đúng `Số thân gắn` (`DEC-04`). |
+| `FR-36` | Tự động load thông tin ĐHN gỡ, tự động fill ĐHN gắn & combo định mức vật tư khi nhập đúng `Số thân gắn` (`DEC-05`). |
 | `FR-37` | 4 trạng thái hoàn công: `Chưa giao`, `Đã giao`, `Hoàn công`, `Đã hủy`. |
 | `FR-37A` | Chế độ `Bảng kê` hỗ trợ `In thống kê vật tư` và `Hoàn công bảng kê` (Chốt BK). |
 
@@ -77,19 +77,19 @@
 | Mã | Mô tả chi tiết (`v1.1`) |
 |---|---|
 | `BR-26` | Cập nhật hoàn công thủ công trên Portal khi không thao tác được trên Mobile. |
-| `BR-27` | *(Cập nhật chốt `OPEN-05`)* Bắt buộc nhập `Ngày thay`, `Chỉ số gỡ`, `Số thân gắn` (phải ở trạng thái **`Chưa sử dụng`**, không chấp nhận `Tồn kho` hoặc `Đã sử dụng` — `DEC-01`), `Chì góc mới` và `Vật tư sử dụng`. |
+| `BR-27` | *(Cập nhật chốt `TBD-05`)* Bắt buộc nhập `Ngày thay`, `Chỉ số gỡ`, `Số thân gắn` (phải ở trạng thái **`Chưa sử dụng`**, không chấp nhận `Tồn kho` hoặc `Đã sử dụng` — `DEC-03`), `Chì góc mới` và `Vật tư sử dụng`. |
 | `BR-28` | Bắt buộc tối thiểu 1 ảnh trước và 1 ảnh sau hoàn công (mỗi vùng tối đa 5 ảnh). |
 | `BR-28A` | **Thời hạn chỉnh sửa hoàn công (`86exxta86`):** Chỉ Tổ trưởng mới được sửa sau khi NV hoàn công, và **khóa chỉnh sửa sau 5 ngày kể từ ngày hoàn công**. |
-| `BR-28B` | **Chốt bảng kê (`OPEN-02`):** Cho phép chốt bảng kê dù còn dòng `Chưa thay`/`Trở ngại` (các dòng đó tự chuyển sang `Nhắc thay tự động`). Sau khi `Đã chốt`, **khóa tuyệt đối mọi thao tác sửa/hủy hoàn công ở cả UI (icon dòng + checkbox/nút bulk) lẫn Backend**; không có chức năng Mở chốt. |
+| `BR-28B` | **Chốt bảng kê (`TBD-02` / `DEC-05`):** Cho phép chốt bảng kê dù còn dòng `Chưa thay`/`Trở ngại` (các dòng đó tự chuyển sang `Nhắc thay tự động`). Sau khi `Đã chốt`, **khóa tuyệt đối mọi thao tác sửa/hủy hoàn công ở cả UI (icon dòng + checkbox/nút bulk) lẫn Backend**; không có chức năng Mở chốt. |
 
 ---
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [x] `AC-01`: Tìm theo `Số thân` và `Số chì` ở Tìm kiếm nâng cao trả đúng danh bộ đã hoàn công.
-- [ ] `AC-02`: Nhập `Số thân gắn` ở trạng thái `Tồn kho` hoặc `Đã sử dụng` bị từ chối (dấu `✕` đỏ, không fill thông số); nhập `Chưa sử dụng` hiện `✓` xanh + tự fill thông số & 5 vật tư combo (`DEC-01`, `DEC-04`).
-- [ ] `AC-03`: Bản ghi hoàn công quá 5 ngày bị khóa nút Sửa/Cập nhật (`BR-28A`).
-- [ ] `AC-04`: Sau khi Chốt bảng kê (`Đã chốt`), cả icon dòng, checkbox, nút bulk `Hủy` lẫn API Backend đều khóa chỉnh sửa/hủy (`BR-28B`), và dòng chưa thay xuất hiện ở `/nhacthaytudong`.
+- [x] `AC-HC-01`: Tìm theo `Số thân` và `Số chì` ở Tìm kiếm nâng cao trả đúng danh bộ đã hoàn công.
+- [ ] `AC-HC-02`: Nhập `Số thân gắn` ở trạng thái `Tồn kho` hoặc `Đã sử dụng` bị từ chối (dấu `✕` đỏ, không fill thông số); nhập `Chưa sử dụng` hiện `✓` xanh + tự fill thông số & 5 vật tư combo (`DEC-03`, `DEC-05`).
+- [ ] `AC-HC-03`: Bản ghi hoàn công quá 5 ngày bị khóa nút Sửa/Cập nhật (`BR-28A`).
+- [ ] `AC-HC-04`: Sau khi Chốt bảng kê (`Đã chốt`), cả icon dòng, checkbox, nút bulk `Hủy` lẫn API Backend đều khóa chỉnh sửa/hủy (`BR-28B`), và dòng chưa thay xuất hiện ở `/nhacthaytudong`.
 
 ---
 
@@ -105,5 +105,5 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.6`; đánh dấu thiếu toàn bộ BR/FR Chốt bảng kê & Thống kê vật tư (`OPEN-02`, `OPEN-05`) |
-| `v1.1` | 2026-11-23 | nhanlt | Chốt `OPEN-02` (điều kiện Chốt BK & đổ sang Nhắc thay), `OPEN-05` (bắt buộc `Chỉ số gỡ *`), `DEC-04` (rule tra cứu `Số thân gắn` & auto-fill combo vật tư), khóa sửa sau 5 ngày (`BR-28A`); đưa lý do hủy hoàn công vào Roadmap `v2.0` |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.6`; đánh dấu thiếu toàn bộ BR/FR Chốt bảng kê & Thống kê vật tư (`TBD-02`, `TBD-05`) |
+| `v1.1` | 2026-11-23 | nhanlt | Chốt `TBD-02` (điều kiện Chốt BK & đổ sang Nhắc thay), `TBD-05` (bắt buộc `Chỉ số gỡ *`), `DEC-05` (rule tra cứu `Số thân gắn` & auto-fill combo vật tư), khóa sửa sau 5 ngày (`BR-28A`); đưa lý do hủy hoàn công vào Roadmap `v2.0` |

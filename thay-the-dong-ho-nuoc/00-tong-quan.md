@@ -1,6 +1,6 @@
 # 1. Tổng quan hệ thống & Phân quyền — Phần mềm Báo thay ĐHN (Nhà Bè)
 
-> **Phiên bản:** `v1.0` · **Cập nhật:** 2026-11-17 · **Trạng thái:** Baseline từ SRS V1.4 (chuẩn hóa cấu trúc ISO/IEC/IEEE 29148)
+> **Phiên bản:** `v1.1` · **Cập nhật:** 2026-11-23 · **Trạng thái:** Đồng bộ `v1.1` (`As-Is` — 12 tính năng, bổ sung Phòng DVKH; cấu trúc chuẩn ISO/IEC/IEEE 29148)
 
 > [!NOTE]
 > Tài liệu này chuyển thể nguyên trạng nội dung bản gốc **SRS_ThayDHN_V1.4** (tài liệu ký hợp đồng với Công ty Cổ phần Cấp nước Nhà Bè, ngày 10/03/2026) sang cấu trúc chuẩn **ISO/IEC/IEEE 29148** trên Living Docs. Các nội dung còn thiếu hoặc mâu thuẫn ở bản V1.4 được đánh dấu bằng thẻ `[!WARNING]` và `[!CAUTION]` để BA/PM/Dev/QA bổ sung và đối chiếu với phần mềm thực tế.
@@ -65,6 +65,7 @@ Phần mềm mới **không thay thế hoàn toàn** hệ thống hiện tại c
 | **QLML** | Phòng Quản lý mạng lưới cấp nước (gồm QLML 1 và QLML 2) |
 | **QLĐH / QLĐHCN** | Phòng Quản lý điều hành cấp nước |
 | **KTKS** | Phòng Kiểm tra kiểm soát |
+| **DVKH** | Phòng Dịch vụ khách hàng |
 | **BLĐ / PGĐ** | Ban lãnh đạo / Phó Giám đốc |
 | **VPĐT** | Văn phòng điện tử |
 
@@ -76,8 +77,9 @@ Phần mềm mới **không thay thế hoàn toàn** hệ thống hiện tại c
 
 | Tác nhân | Trách nhiệm chính |
 |---|---|
-| **NV Phòng QLĐHN** | Ghi nhận code ĐHN từ công tác đọc số; duyệt báo thay bất thường (cấp 1); tạo báo thay theo yêu cầu; xử lý và duyệt trở ngại (trường hợp 4). |
-| **NV Phòng KTKS** | Tạo và duyệt báo thay theo yêu cầu; duyệt báo thay bất thường (cấp 2); xử lý và duyệt trở ngại (trường hợp 5–10). |
+| **NV Phòng QLĐHN** | Ghi nhận code ĐHN từ công tác đọc số; duyệt báo thay bất thường (cấp 1); tạo báo thay theo yêu cầu; xử lý và duyệt trở ngại trên tab **`Phòng ĐHN`** (bao gồm loại 4). |
+| **NV Phòng DVKH** | Xử lý và duyệt trở ngại thuộc nhóm dịch vụ khách hàng trên tab **`Phòng DVKH`** (bao gồm loại 1–3 — chốt `TBD-01` / `DEC-04`). |
+| **NV Phòng KTKS** | Tạo và duyệt báo thay theo yêu cầu; duyệt báo thay bất thường (cấp 2); xử lý và duyệt trở ngại trên tab **`Phòng KTKS`**. |
 | **NV Phòng QLĐHCN** | Lập bảng kê thay ĐHN và bảng kê nhắc thay cho cả 3 loại báo thay; theo dõi, in, hủy bảng kê trước khi BLĐ duyệt. |
 | **Ban Lãnh đạo (PGĐ)** | Duyệt hoặc trả về bảng kê thay ĐHN và bảng kê nhắc thay. |
 | **NV / Tổ trưởng QLML** | Tiếp nhận bảng kê đã duyệt; giao nhân viên thi công; cập nhật/hủy hoàn công trên Portal; thống kê vật tư và chốt bảng kê. |
@@ -89,19 +91,20 @@ Phần mềm mới **không thay thế hoàn toàn** hệ thống hiện tại c
 > [!WARNING] Thiếu đặc tả ở V1.4 — Ma trận phân quyền chi tiết
 > SRS V1.4 chưa có bảng phân quyền tổng hợp (Xem / Tạo / Sửa / Xóa / Duyệt / Hủy / Xuất Excel) theo từng vai trò và phạm vi đơn vị (`QLĐHN 1/2`, `QLML 1/2`). Dưới đây là khung đối chiếu ban đầu suy ra từ mô tả chức năng — **cần review lại với phần mềm thực tế**.
 
-| Nhóm chức năng | QLĐHN | KTKS | QLĐHCN | BLĐ (PGĐ) | QLML (Web) | NV Thi công (App) | Admin |
-|---|---|---|---|---|---|---|---|
-| Đăng nhập & Dashboard | Xem | Xem | Xem | Xem | Xem | Xem (App) | Xem |
-| Báo thay theo yêu cầu (Tạo/Sửa/Hủy) | Tạo / Sửa / Hủy | Tạo / Sửa / Hủy | — | — | — | — | — |
-| Duyệt báo thay theo yêu cầu | — | Duyệt / Hủy duyệt | — | — | — | — | — |
-| Duyệt báo thay bất thường | Duyệt cấp 1 | Duyệt cấp 2 | — | — | — | — | — |
-| Lập / Hủy / In bảng kê | — | — | Toàn quyền | — | — | — | — |
-| Duyệt / Trả về bảng kê | — | — | — | Duyệt / Trả về | — | — | — |
-| Giao NV thay ĐHN | — | — | — | — | Giao NV | — | — |
-| Danh sách hoàn công & Chốt BK | — | — | — | — | Cập nhật / Hủy / Chốt | Gửi hoàn công | — |
-| Xử lý trở ngại | Duyệt/Hủy (Loại 4) | Duyệt/Hủy (Loại 5–10) | *(Chưa rõ)* | — | *(Chưa rõ)* | Báo trở ngại | — |
-| Nhắc thay | — | — | Lập BK nhắc thay | Duyệt BK nhắc thay | — | — | — |
-| Import vật tư & Nhật ký | *(Chưa rõ)* | *(Chưa rõ)* | *(Chưa rõ)* | *(Chưa rõ)* | *(Chưa rõ)* | — | *(Chưa rõ)* |
+| Nhóm chức năng | QLĐHN | DVKH | KTKS | QLĐHCN | BLĐ (PGĐ) | QLML (Web) | NV Thi công (App) | Admin |
+|---|---|---|---|---|---|---|---|---|
+| Đăng nhập & Dashboard | Xem | Xem | Xem | Xem | Xem | Xem | Xem (App) | Xem |
+| Báo thay theo yêu cầu (Tạo/Sửa/Hủy) | Tạo / Sửa / Hủy | — | Tạo / Sửa / Hủy | — | — | — | — | — |
+| Duyệt báo thay theo yêu cầu | — | — | Duyệt / Trả về / Hủy duyệt | — | — | — | — | — |
+| Duyệt báo thay bất thường | Duyệt cấp 1 | — | Duyệt cấp 2 | — | — | — | — | — |
+| Lập / Gửi duyệt / Hủy / In bảng kê | — | — | — | Toàn quyền | — | — | — | — |
+| Duyệt / Trả về / Hủy duyệt bảng kê | — | — | — | — | Duyệt / Trả về / Hủy duyệt | — | — | — |
+| Giao NV thay ĐHN & Thu hồi | — | — | — | — | — | Giao NV / Hủy giao | — | — |
+| Danh sách hoàn công & Chốt BK | — | — | — | — | — | Cập nhật / Hủy / Chốt | Gửi hoàn công | — |
+| Xử lý trở ngại (3 tab — `DEC-04`) | Duyệt/Hủy (Tab ĐHN) | Duyệt/Hủy (Tab DVKH) | Duyệt/Hủy (Tab KTKS) | *(TBD-10)* | — | *(TBD-10)* | Báo trở ngại | — |
+| Nhắc thay | — | — | — | Lập BK nhắc thay | Duyệt BK nhắc thay | — | — | — |
+| Import & Quản lý kho vật tư | *(TBD-10)* | — | *(TBD-10)* | *(TBD-10)* | — | Xem / Tra cứu | — | Import / Quản lý |
+| Báo cáo Thay ĐHN (6 mẫu) | Xem / Xuất | Xem / Xuất | Xem / Xuất | Xem / Xuất | Xem / Xuất | Xem / Chốt BC1 / Xuất | — | Xem / Xuất |
 
 ---
 
@@ -145,9 +148,9 @@ Theo mục `3.5` của SRS V1.4, hệ thống có 4 đối tượng có vòng đ
 
 - **Chương 1 — Giới thiệu & Tổng quan hệ thống:** [README](README.md) · Tài liệu này (`00-tong-quan.md`)
 - **Chương 2 — Dữ liệu & Tích hợp hệ thống:** [2.1. Quy tắc chung, Dữ liệu & Master Data](02-quy-tac-chung.md) · [2.2. Đặc tả Tích hợp & API](04-tich-hop-api.md)
-- **Chương 3 — Đặc tả chức năng (`3.1` → `3.11`):** [Danh mục 11 tính năng Web & Mobile](01-tinh-nang/README.md)
+- **Chương 3 — Đặc tả chức năng (`3.1` → `3.12`):** [Danh mục 12 tính năng Web & Mobile](01-tinh-nang/README.md)
 - **Chương 4 — Yêu cầu phi chức năng (NFR):** [4.1. Hiệu năng, Offline, Bảo mật & Audit Log](05-yeu-cau-phi-chuc-nang.md)
-- **Chương 5 — Phụ lục & Quản trị thay đổi:** [5.1. Điểm thiếu & mâu thuẫn V1.4](06-diem-thieu-va-mau-thuan.md) · [5.2. Nhật ký chốt (`DEC-*` / `OPEN-*`)](03-nhat-ky-chot.md)
+- **Chương 5 — Phụ lục & Quản trị thay đổi:** [5.1. Điểm thiếu & mâu thuẫn V1.4](06-diem-thieu-va-mau-thuan.md) · [5.2. Nhật ký chốt (`DEC-*`), TBD List (`TBD-*`) & Roadmap `v2.0`](03-nhat-ky-chot.md)
 
 ---
 

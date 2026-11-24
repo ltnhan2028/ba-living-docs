@@ -1,6 +1,6 @@
 # 10. Import & Quản lý kho vật tư (ĐHN & Chì góc)
 
-> **Phiên bản hiện tại:** `v1.1` · **Cập nhật lần cuối:** 2026-11-23 · **Trạng thái:** Cập nhật đầy đủ theo phần mềm hiện tại (`As-Is` — đóng `OPEN-04` & chốt `DEC-01`)
+> **Phiên bản hiện tại:** `v1.1` · **Cập nhật lần cuối:** 2026-11-23 · **Trạng thái:** Cập nhật đầy đủ theo phần mềm hiện tại (`As-Is` — đóng `TBD-04` & chốt `DEC-03`)
 
 ---
 
@@ -9,7 +9,7 @@
 - **Mục tiêu:** Nhập (import) từ Excel và quản lý kho vật tư gồm **Đồng hồ nước (ĐHN)** và **Chì góc** theo 4 trạng thái vòng đời, phục vụ tra cứu tự động fill thông số và tự động khóa vật tư khi hoàn công thay ĐHN trên Web & Mobile.
 - **Tác nhân liên quan:** Bộ phận Kho / Vật tư, Phòng QLML, Admin.
 - **Route thực tế:** `/ImportVatTu`.
-- **Tham chiếu SRS V1.4:** Mục `2.1 Bảng 3` (trước đây bỏ trống 100% đặc tả — `OPEN-04`).
+- **Tham chiếu SRS V1.4:** Mục `2.1 Bảng 3` (trước đây bỏ trống 100% đặc tả — `TBD-04`).
 
 ---
 
@@ -66,7 +66,7 @@
 
 | Mã | Mô tả chi tiết (`v1.1`) |
 |---|---|
-| `BR-VT-01` | **Phân tách 4 trạng thái vật tư (`DEC-01`):**<br>• `Tồn kho`: Vật tư lưu kho, **chưa được phép dùng để hoàn công**.<br>• `Chưa sử dụng`: Vật tư đã xuất/sẵn sàng, **được phép chọn khi hoàn công**.<br>• `Đã sử dụng`: Đã gắn cho 1 danh bộ, **khóa không cho chọn trùng**.<br>• `Hủy`: Vật tư hỏng/hủy, không cho dùng. |
+| `BR-VT-01` | **Phân tách 4 trạng thái vật tư (`DEC-03`):**<br>• `Tồn kho`: Vật tư lưu kho, **chưa được phép dùng để hoàn công**.<br>• `Chưa sử dụng`: Vật tư đã xuất/sẵn sàng, **được phép chọn khi hoàn công**.<br>• `Đã sử dụng`: Đã gắn cho 1 danh bộ, **khóa không cho chọn trùng**.<br>• `Hủy`: Vật tư hỏng/hủy, không cho dùng. |
 | `BR-VT-02` | API tra cứu vật tư khi hoàn công (`LayThongTinSoThanSoChi`) chỉ trả về thành công cho các vật tư có trạng thái **`Chưa sử dụng`**. |
 | `BR-VT-03` | Định dạng ghi log sử dụng (`NV SỬ DỤNG`, `NGÀY SỬ DỤNG`, `MỤC ĐÍCH SD`) phải thống nhất giữa cả bảng `Đồng hồ nước` và `Chì góc`. |
 
@@ -74,10 +74,10 @@
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [x] `AC-01`: Tải được cả 2 file Excel mẫu (`dhn` và `chiGoc`) trực tiếp từ modal `Upload file`.
-- [x] `AC-02`: Hoàn công trên Mobile bằng ĐHN `Chưa sử dụng` (`V03472`) và Chì góc (`NBW 235000`) → cả 2 tự đổi sang `Đã sử dụng` trên `/ImportVatTu`.
-- [ ] `AC-03`: Nhập ĐHN trạng thái `Tồn kho` hoặc `Đã sử dụng` vào màn Hoàn công đều bị từ chối (`BR-VT-01`, `BR-VT-02`).
-- [ ] `AC-04`: Hủy hoàn công trả vật tư về `Chưa sử dụng` đồng thời xóa trắng `NV SỬ DỤNG`, `NGÀY SỬ DỤNG`, `MỤC ĐÍCH SD` (`FR-VT-04`).
+- [x] `AC-VT-01`: Tải được cả 2 file Excel mẫu (`dhn` và `chiGoc`) trực tiếp từ modal `Upload file`.
+- [x] `AC-VT-02`: Hoàn công trên Mobile bằng ĐHN `Chưa sử dụng` (`V03472`) và Chì góc (`NBW 235000`) → cả 2 tự đổi sang `Đã sử dụng` trên `/ImportVatTu`.
+- [ ] `AC-VT-03`: Nhập ĐHN trạng thái `Tồn kho` hoặc `Đã sử dụng` vào màn Hoàn công đều bị từ chối (`BR-VT-01`, `BR-VT-02`).
+- [ ] `AC-VT-04`: Hủy hoàn công trả vật tư về `Chưa sử dụng` đồng thời xóa trắng `NV SỬ DỤNG`, `NGÀY SỬ DỤNG`, `MỤC ĐÍCH SD` (`FR-VT-04`).
 
 ---
 
@@ -93,5 +93,5 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | nhanlt | Tạo khung đặc tả cho chức năng *Import vật tư* có mặt ở Bảng `2.1` nhưng bị bỏ trống trong SRS V1.4 (`OPEN-04`) |
-| `v1.1` | 2026-11-23 | nhanlt | Đóng `OPEN-04`: bổ sung đặc tả 100% thực tế `/ImportVatTu` (2 chế độ ĐHN 19 cột & Chì góc 11 cột, 20 hiệu, 14 cỡ, 2 file Excel mẫu, quy tắc 4 trạng thái `DEC-01` & đồng bộ hoàn công/hủy hoàn công) |
+| `v1.0` | 2026-11-17 | nhanlt | Tạo khung đặc tả cho chức năng *Import vật tư* có mặt ở Bảng `2.1` nhưng bị bỏ trống trong SRS V1.4 (`TBD-04`) |
+| `v1.1` | 2026-11-23 | nhanlt | Đóng `TBD-04`: bổ sung đặc tả 100% thực tế `/ImportVatTu` (2 chế độ ĐHN 19 cột & Chì góc 11 cột, 20 hiệu, 14 cỡ, 2 file Excel mẫu, quy tắc 4 trạng thái `DEC-03` & đồng bộ hoàn công/hủy hoàn công) |

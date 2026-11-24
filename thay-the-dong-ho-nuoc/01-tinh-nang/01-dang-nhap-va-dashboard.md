@@ -85,11 +85,11 @@
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [ ] `AC-01`: Tài khoản chưa được cấp quyền `Thay Đồng hồ nước` không thấy menu và không truy cập được `/dashboard`.
-- [ ] `AC-02`: Chọn `Phòng QLML 1` chỉ hiển thị 4 phường thuộc Phòng 1; chọn `Phòng QLML 2` chỉ hiển thị 5 phường/xã thuộc Phòng 2.
-- [ ] `AC-03`: Chọn `Tháng` bất kỳ cập nhật đồng bộ cả 7 KPI, biểu đồ và bảng danh sách bên dưới.
-- [ ] `AC-04`: Click 3 thẻ KPI có drill-down điều hướng đúng tới `/lapbangke`, `/duyetbangke`, `/xulytrongai`.
-- [ ] `AC-05`: Tổng số ở thẻ `Tổng số báo thay` khớp với tổng bản ghi bảng `Danh sách báo thay` và tổng 3 nhánh Donut.
+- [ ] `AC-DASH-01`: Tài khoản chưa được cấp quyền `Thay Đồng hồ nước` không thấy menu và không truy cập được `/dashboard`.
+- [ ] `AC-DASH-02`: Chọn `Phòng QLML 1` chỉ hiển thị 4 phường thuộc Phòng 1; chọn `Phòng QLML 2` chỉ hiển thị 5 phường/xã thuộc Phòng 2.
+- [ ] `AC-DASH-03`: Chọn `Tháng` bất kỳ cập nhật đồng bộ cả 7 KPI, biểu đồ và bảng danh sách bên dưới.
+- [ ] `AC-DASH-04`: Click 3 thẻ KPI có drill-down điều hướng đúng tới `/lapbangke`, `/duyetbangke`, `/xulytrongai`.
+- [ ] `AC-DASH-05`: Tổng số ở thẻ `Tổng số báo thay` khớp với tổng bản ghi bảng `Danh sách báo thay` và tổng 3 nhánh Donut.
 
 ---
 

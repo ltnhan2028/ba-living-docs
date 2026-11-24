@@ -46,14 +46,15 @@ Tạo hoặc cập nhật đủ các file trong `<du-an>/` theo đúng chuẩn q
 2. `00-tong-quan.md` — Chương 1: Thông tin chung, Phạm vi & Ranh giới hệ thống ngoài, Glossary, Vai trò & RBAC Matrix, Sơ đồ tổng quan & State Diagrams.
 3. `02-quy-tac-chung.md` — Chương 2.1: Quy tắc vận hành chung, Data Dictionary, Master Data.
 4. `04-tich-hop-api.md` — Chương 2.2: Bản đồ & đặc tả tích hợp API, đồng bộ, retry/fail-over.
-5. `01-tinh-nang/README.md` + `01-tinh-nang/NN-<slug>.md` — Chương 3: Mỗi tính năng tuân thủ **template 7 phần** (`Mục tiêu`, `Luồng & Sơ đồ`, `Màn hình & Trường dữ liệu`, `FR-*`, `BR-*`, `AC-*`, `UI & Lịch sử thay đổi`).
+5. `01-tinh-nang/README.md` + `01-tinh-nang/NN-<slug>.md` — Chương 3: Mỗi tính năng tuân thủ **template 7 phần** (`Mục tiêu`, `Luồng & Sơ đồ`, `Màn hình & Trường dữ liệu`, `FR-<MOD>-NN`, `BR-<MOD>-NN`, `AC-<MOD>-NN`, `UI & Lịch sử thay đổi`).
 6. `05-yeu-cau-phi-chuc-nang.md` — Chương 4: Performance, Concurrency, Mobile Offline, Storage/Media, Security & Audit Trail.
 7. `06-diem-thieu-va-mau-thuan.md` — Chương 5.1: Bảng `GAP-*` tổng hợp mọi điểm thiếu/mâu thuẫn của tài liệu gốc.
-8. `03-nhat-ky-chot.md` — Chương 5.2: Bảng `DEC-*` (các mốc đã chốt) và `OPEN-*` (các điểm mở cần xác nhận).
+8. `03-nhat-ky-chot.md` — Chương 5.2: Bảng `DEC-*` (chỉ cấp cho quyết định nghiệp vụ/phạm vi), bảng **TBD List (`TBD-*`)** và Roadmap `v2.0` (`RM-*`).
 
 **Nguyên tắc viết:**
 - Không tự bịa quy tắc khi nguồn không có; dùng `> [!WARNING]` cho phần thiếu và `> [!CAUTION]` cho phần mâu thuẫn.
-- Giữ nguyên định dạng `**Phiên bản hiện tại:** \`vX.Y\` · **Cập nhật lần cuối:** YYYY-MM-DD` và tiêu đề `Lịch sử thay đổi` để `.github/scripts/update-version-history.mjs` hoạt động chính xác.
+- Giữ nguyên định dạng `**Phiên bản hiện tại:** \`vX.Y\` · **Cập nhật lần cuối:** YYYY-MM-DD` và cột bảng `| Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |` để `.github/scripts/update-version-history.mjs` hoạt động chính xác.
+- Khi nâng phiên bản `v1.x` ở Chương 3, luôn rà đồng bộ lại số liệu/quy tắc ở Chương 1 (`00-tong-quan.md`), Chương 2 (`02-quy-tac-chung.md`, `04-tich-hop-api.md`) và Chương 4 (`05-yeu-cau-phi-chuc-nang.md`).
 
 ---
 

@@ -59,9 +59,9 @@
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [x] `AC-01`: Hub `/baocaohoancongbaothaydhn` hiển thị đủ 6 mẫu báo cáo và điều hướng chính xác từng mẫu.
-- [x] `AC-02`: Báo cáo 5 (`Thống kê thay ĐHN`) tải đủ 23 cột dữ liệu chi tiết theo bộ lọc `Phòng` & khoảng ngày.
-- [x] `AC-03`: Báo cáo 6 (`Báo cáo số lượng thay ĐHN`) cộng tổng hàng ngang & hàng dọc khớp 100% ở dòng `TỔNG CỘNG`, không phát sinh `NaN`/lỗi.
+- [x] `AC-BC-01`: Hub `/baocaohoancongbaothaydhn` hiển thị đủ 6 mẫu báo cáo và điều hướng chính xác từng mẫu.
+- [x] `AC-BC-02`: Báo cáo 5 (`Thống kê thay ĐHN`) tải đủ 23 cột dữ liệu chi tiết theo bộ lọc `Phòng` & khoảng ngày.
+- [x] `AC-BC-03`: Báo cáo 6 (`Báo cáo số lượng thay ĐHN`) cộng tổng hàng ngang & hàng dọc khớp 100% ở dòng `TỔNG CỘNG`, không phát sinh `NaN`/lỗi.
 
 ---
 

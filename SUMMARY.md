@@ -30,7 +30,7 @@
   * [3.12. [Web] Báo cáo Thay ĐHN (6 mẫu báo cáo)](thay-the-dong-ho-nuoc/01-tinh-nang/12-bao-cao-thay-dhn.md)
 * [4.1. Yêu cầu phi chức năng (NFR)](thay-the-dong-ho-nuoc/05-yeu-cau-phi-chuc-nang.md)
 * [5.1. Điểm thiếu & mâu thuẫn (Gap Tracker)](thay-the-dong-ho-nuoc/06-diem-thieu-va-mau-thuan.md)
-* [5.2. Nhật ký chốt, Vấn đề mở & Roadmap v2.0](thay-the-dong-ho-nuoc/03-nhat-ky-chot.md)
+* [5.2. Nhật ký chốt, TBD List & Roadmap v2.0](thay-the-dong-ho-nuoc/03-nhat-ky-chot.md)
 
 ## 3. Ghi thu tiền nước
 * [Giới thiệu](ghi-thu-tien-nuoc/README.md)

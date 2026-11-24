@@ -48,7 +48,7 @@
 | Phòng | Select2 | `Phòng ban ghi thu 1`, `Phòng ban ghi thu 2` |
 | Tổ | Select2 | 7 tổ quản lý ghi thu |
 | Năm / Kỳ / Đợt | Select2 | `Năm` (`2021–2026`), `Kỳ` (`1–12`), `Đợt` (`1–12`) |
-| Code | Select2 | **6 mã chính thức (`DEC-04` / đóng `OPEN-03`):**<br>• `60 - Ngưng`<br>• `61 - Kính mờ`<br>• `62 - Quay ngược, gắn ngược`<br>• `63 - Mờ mặt số, mất ĐHN`<br>• `64 - Gỡ co nối,khóa góc, tự nâng, hạ`<br>• `65 - Trở ngại thay` |
+| Code | Select2 | **6 mã chính thức (`DEC-01` / đóng `TBD-03`):**<br>• `60 - Ngưng`<br>• `61 - Kính mờ`<br>• `62 - Quay ngược, gắn ngược`<br>• `63 - Mờ mặt số, mất ĐHN`<br>• `64 - Gỡ co nối,khóa góc, tự nâng, hạ`<br>• `65 - Trở ngại thay` |
 
 *(Không có bộ lọc `Loại báo thay` trên màn hình này; bổ sung nút `Xuất Excel`.)*
 
@@ -70,7 +70,7 @@
 
 | Mã | Mô tả chi tiết (`v1.1`) |
 |---|---|
-| `BR-BT-01` | Báo thay bất thường liên kết với **6 mã code đọc số `60, 61, 62, 63, 64, 65`** *(đóng `OPEN-03`, không có code `66`)*. |
+| `BR-BT-01` | Báo thay bất thường liên kết với **6 mã code đọc số `60, 61, 62, 63, 64, 65`** *(đóng `TBD-03` / `DEC-01`, không có code `66`)*. |
 | `BR-BT-02`, `BR-BT-03` | Luồng duyệt 2 cấp: **Phòng ĐHN duyệt → Phòng KTKS duyệt → Lập bảng kê**. Chỉ báo thay duyệt đủ 2 cấp mới được lập bảng kê. |
 | `BR-BT-04`, `BR-BT-05` | Chỉ hủy duyệt khi chưa lập bảng kê; phân quyền chặt theo cấp duyệt. |
 | `BR-BT-06` | Duyệt Cấp 2 (`Phòng KTKS`) bắt buộc bản ghi phải có tối thiểu 01 hình ảnh/tệp đính kèm. |
@@ -80,10 +80,10 @@
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [x] `AC-01`: Dropdown `Code` hiển thị đúng 6 mã `60–65`.
-- [x] `AC-02`: Bản ghi duyệt ở Tab `Phòng ĐHN` chuyển sang bảng `Đã duyệt` của ĐHN và xuất hiện ở `Chờ duyệt` của Tab `Phòng KTKS`.
-- [x] `AC-03`: Bấm duyệt Cấp 2 khi chưa có hình bị chặn; sau khi upload hình ở `ViewImages` thì duyệt thành công.
-- [ ] `AC-04`: Danh bộ đang nằm trong bảng kê khác (`nhap`, `chua_giao`, `da_giao`) bị chặn duyệt lập bảng kê trùng ở Cấp 2 (`BR-BT-07`).
+- [x] `AC-BT-01`: Dropdown `Code` hiển thị đúng 6 mã `60–65`.
+- [x] `AC-BT-02`: Bản ghi duyệt ở Tab `Phòng ĐHN` chuyển sang bảng `Đã duyệt` của ĐHN và xuất hiện ở `Chờ duyệt` của Tab `Phòng KTKS`.
+- [x] `AC-BT-03`: Bấm duyệt Cấp 2 khi chưa có hình bị chặn; sau khi upload hình ở `ViewImages` thì duyệt thành công.
+- [ ] `AC-BT-04`: Danh bộ đang nằm trong bảng kê khác (`nhap`, `chua_giao`, `da_giao`) bị chặn duyệt lập bảng kê trùng ở Cấp 2 (`BR-BT-07`).
 
 ---
 
@@ -95,5 +95,5 @@
 
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
-| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.2`; đánh dấu mâu thuẫn Code (`OPEN-03`) và thiếu AC |
-| `v1.1` | 2026-11-23 | nhanlt | Chốt `OPEN-03` (6 mã Code `60–65`); bổ sung rule bắt buộc ảnh duyệt Cấp 2 (`BR-BT-06`), cảnh báo chống trùng BK (`BR-BT-07`), bộ lọc Năm/Kỳ/Đợt và 3 cột KTKS |
+| `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.2`; đánh dấu mâu thuẫn Code (`TBD-03`) và thiếu AC |
+| `v1.1` | 2026-11-23 | nhanlt | Chốt `TBD-03` / `DEC-01` (6 mã Code `60–65`); bổ sung rule bắt buộc ảnh duyệt Cấp 2 (`BR-BT-06`), cảnh báo chống trùng BK (`BR-BT-07`), bộ lọc Năm/Kỳ/Đợt và 3 cột KTKS |

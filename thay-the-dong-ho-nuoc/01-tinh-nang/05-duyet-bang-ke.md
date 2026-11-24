@@ -68,9 +68,9 @@
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [x] `AC-01`: Mặc định tải danh sách `Chưa duyệt`; duyệt thành công chuyển sang `Đã duyệt` và đổi nút thao tác thành `Hủy duyệt`.
-- [x] `AC-02`: Bấm `Trả về` khi để trống lý do bị chặn với thông báo `"Vui lòng nhập lý do trả về"`.
-- [x] `AC-03`: Bảng kê đã duyệt xuất hiện ngay tại màn hình `/giaonvthaydhn`.
+- [x] `AC-DBK-01`: Mặc định tải danh sách `Chưa duyệt`; duyệt thành công chuyển sang `Đã duyệt` và đổi nút thao tác thành `Hủy duyệt`.
+- [x] `AC-DBK-02`: Bấm `Trả về` khi để trống lý do bị chặn với thông báo `"Vui lòng nhập lý do trả về"`.
+- [x] `AC-DBK-03`: Bảng kê đã duyệt xuất hiện ngay tại màn hình `/giaonvthaydhn`.
 
 ---
 

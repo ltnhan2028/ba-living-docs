@@ -26,4 +26,4 @@
 
 ## 5. Phụ lục & Quản trị thay đổi
 * [5.1. Tổng hợp điểm thiếu & mâu thuẫn (Gap Tracker)](06-diem-thieu-va-mau-thuan.md)
-* [5.2. Nhật ký chốt, Vấn đề mở & Roadmap v2.0](03-nhat-ky-chot.md)
+* [5.2. Nhật ký chốt, TBD List & Roadmap v2.0](03-nhat-ky-chot.md)

@@ -1,6 +1,6 @@
 # 4.1. Yêu cầu phi chức năng (Non-Functional Requirements — NFR)
 
-> **Phiên bản:** `v1.0` · **Cập nhật:** 2026-11-17 · **Nguồn:** Rà soát chuẩn ISO/IEC/IEEE 29148 & ISO 25010
+> **Phiên bản:** `v1.1` · **Cập nhật:** 2026-11-23 · **Nguồn:** Rà soát chuẩn ISO/IEC/IEEE 29148 & ISO 25010 (đồng bộ giới hạn `300` dòng/BK — `DEC-02`)
 
 > [!WARNING] Thiếu 100% ở SRS V1.4 (`GAP-14`)
 > Bảng lịch sử phiên bản `v1.2` trong `SRS_ThayDHN_V1.4.docx` có ghi *"Thêm Non-Functional Requirement"*, nhưng toàn bộ nội dung NFR không có trong tài liệu V1.4. Chương này tạo khung chuẩn để bổ sung các ngưỡng nghiệm thu kỹ thuật với Dev/QA và Khách hàng.
@@ -11,7 +11,7 @@
 
 | Mã | Hạng mục | Chỉ tiêu cần chốt `[TODO]` |
 |---|---|---|
-| `NFR-PERF-01` | Thời gian tải danh sách & tìm kiếm (Web Portal) | Thời gian phản hồi truy vấn danh bộ, báo thay, bảng kê (tối đa 250 dòng/BK) ≤ `...` giây. |
+| `NFR-PERF-01` | Thời gian tải danh sách & tìm kiếm (Web Portal) | Thời gian phản hồi truy vấn danh bộ, báo thay, bảng kê (tối đa **`300`** dòng/BK — `DEC-02`) ≤ `...` giây. |
 | `NFR-PERF-02` | Chia bảng kê & Xuất Excel | Thời gian chia nhiều bảng kê (vd: 1.000+ danh bộ) và xuất Excel Thống kê vật tư ≤ `...` giây. |
 | `NFR-PERF-03` | Tải & đồng bộ trên Mobile App | Thời gian tải danh sách được giao và gửi hoàn công (gồm tối đa 5 ảnh) trên mạng 4G ≤ `...` giây. |
 
@@ -23,7 +23,7 @@
 |---|---|---|
 | `NFR-CONC-01` | Số lượng người dùng đồng thời | Hệ thống đáp ứng tối thiểu `...` user Web và `...` nhân viên Mobile truy cập đồng thời giờ cao điểm. |
 | `NFR-CONC-02` | Chống tạo trùng báo thay (`BR-YC-02`) | Khi 2 nhân viên tạo báo thay cho cùng 1 danh bộ tại cùng một thời điểm, DB/API phải khóa giao dịch (lock/unique constraint) để không phát sinh 2 báo thay song song. |
-| `NFR-CONC-03` | Xung đột Web vs Mobile | Quy tắc xử lý khi Web hủy bảng kê / đổi phân công đúng lúc Mobile của nhân viên cũ vừa bấm hoàn công hoặc đồng bộ dữ liệu offline (`OPEN-08`). |
+| `NFR-CONC-03` | Xung đột Web vs Mobile | Quy tắc xử lý khi Web hủy bảng kê / đổi phân công đúng lúc Mobile của nhân viên cũ vừa bấm hoàn công hoặc đồng bộ dữ liệu offline (`TBD-08`). |
 
 ---
 

@@ -1,8 +1,9 @@
-"""Kiem tra toan bo link markdown va anh trong repo ba-living-docs."""
+"""Kiem tra toan bo link markdown va the img HTML trong repo ba-living-docs."""
 
 import os
 import re
 import sys
+from urllib.parse import unquote
 
 
 def check_links(repo_root: str, target_subdir: str | None = None) -> int:
@@ -13,14 +14,19 @@ def check_links(repo_root: str, target_subdir: str | None = None) -> int:
 
     scan_dir = os.path.join(repo_root, target_subdir) if target_subdir else repo_root
     for root, dirs, files in os.walk(scan_dir):
-        dirs[:] = [d for d in dirs if d not in {".git", ".agents", "node_modules"}]
+        dirs[:] = [
+            d
+            for d in dirs
+            if d not in {".git", ".agents", "node_modules", "_discovery"}
+        ]
         for f in files:
             if f.endswith(".md"):
                 full = os.path.join(root, f)
                 if full not in md_files:
                     md_files.append(full)
 
-    link_re = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+    md_link_re = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+    html_src_re = re.compile(r"<img\b[^>]*\bsrc=[\"']([^\"']+)[\"']", re.IGNORECASE)
     broken: list[tuple[str, str, str]] = []
     checked = 0
 
@@ -28,11 +34,23 @@ def check_links(repo_root: str, target_subdir: str | None = None) -> int:
         with open(md, "r", encoding="utf-8") as fh:
             text = fh.read()
         base = os.path.dirname(md)
-        for m in link_re.finditer(text):
-            raw_target = m.group(1).strip()
-            if not raw_target or raw_target.startswith(("http://", "https://", "mailto:", "#")):
+
+        targets: list[str] = []
+        for m in md_link_re.finditer(text):
+            raw = m.group(1).strip()
+            # Loai bo optional title trong markdown: (path/file.png "title")
+            if " " in raw and not raw.startswith("<"):
+                raw = raw.split(" ", 1)[0].strip()
+            targets.append(raw.strip("<>"))
+        for m in html_src_re.finditer(text):
+            targets.append(m.group(1).strip())
+
+        for raw_target in targets:
+            if not raw_target or raw_target.startswith(
+                ("http://", "https://", "mailto:", "#", "data:")
+            ):
                 continue
-            target = raw_target.split("#", 1)[0].strip()
+            target = unquote(raw_target.split("#", 1)[0].strip())
             if not target:
                 continue
             checked += 1

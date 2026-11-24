@@ -21,7 +21,7 @@
 
 ### 2.2. Diễn giải luồng chính (`v1.1`)
 1. **Tìm kiếm báo thay (`/lapbangke`):** Chọn Radio `Trường hợp thay` (`Định kỳ` / `Theo yêu cầu` / `Bất thường`), chọn `Phòng *` và các điều kiện lọc. Riêng `Định kỳ` mặc định sắp xếp **tăng dần theo `Ngày kiểm định`** (cũ nhất đi thay trước).
-2. **Chia & Lưu bảng kê (`Chờ gửi`):** Chọn danh bộ → mở modal `Danh sách bảng kê chuyển duyệt`, nhập số dòng tối đa/BK (≤ **`300`**, `DEC-05`), `Phòng QLML` tự khóa tương ứng với `Phòng Ghi thu` → bấm `Chia Bảng Kê` để tự sinh mã BK (`XXXXDK/26`, `XXXXYC/26`, `XXXXBT/26`) → bấm `Lưu chờ duyệt` tạo bảng kê ở trạng thái **`Chờ gửi`**.
+2. **Chia & Lưu bảng kê (`Chờ gửi`):** Chọn danh bộ → mở modal `Danh sách bảng kê chuyển duyệt`, nhập số dòng tối đa/BK (≤ **`300`**, `DEC-02`), `Phòng QLML` tự khóa tương ứng với `Phòng Ghi thu` → bấm `Chia Bảng Kê` để tự sinh mã BK (`XXXXDK/26`, `XXXXYC/26`, `XXXXBT/26`) → bấm `Lưu chờ duyệt` tạo bảng kê ở trạng thái **`Chờ gửi`**.
 3. **Gửi duyệt & Thu hồi gửi duyệt (`/lapbangke` → tab `Theo dõi bảng kê`):**
    - Bấm **`Gửi duyệt bảng kê`** → bảng kê chuyển từ `Chờ gửi` sang **`Chưa duyệt`** (lên màn hình duyệt của Ban Lãnh đạo).
    - Khi BLĐ chưa duyệt, người lập có thể bấm **`Hủy gửi duyệt bảng kê`** để thu hồi về `Chờ gửi`, hoặc bấm **`Hủy bảng kê`**.
@@ -70,7 +70,7 @@
 | Mã | Mô tả chi tiết (`v1.1`) |
 |---|---|
 | `BR-LBK-01` – `BR-LBK-06` | Chỉ báo thay đã duyệt (trừ Định kỳ) mới lập BK; cùng 1 Phòng, cùng 1 Trường hợp thay, cùng 1 Loại báo thay/Code; BK đã duyệt không được hủy. |
-| `BR-LBK-07` | Số lượng tối đa mỗi bảng kê là **`300` danh bộ** *(nâng từ `250` theo yêu cầu khách hàng — `DEC-05`)*. |
+| `BR-LBK-07` | Số lượng tối đa mỗi bảng kê là **`300` danh bộ** *(nâng từ `250` theo yêu cầu khách hàng — `DEC-02`)*. |
 | `BR-LBK-08` | Khi hủy bảng kê, bắt buộc nhập lý do hủy. |
 | `BR-LBK-09` | Khi lập bảng kê, hệ thống tự động khóa `Phòng QLML` tiếp nhận tương ứng với `Phòng Ghi thu` (`Phòng 1` → `QLML 1`, `Phòng 2` → `QLML 2`). |
 
@@ -78,10 +78,10 @@
 
 ## 6. Tiêu chí nghiệm thu (Acceptance Criteria)
 
-- [x] `AC-01`: Lọc `Định kỳ` sắp xếp đúng theo `Ngày kiểm định` tăng dần.
-- [x] `AC-02`: Chia bảng kê cho phép tối đa `300` dòng/BK và tự sinh mã `XXXXDK/26`.
-- [x] `AC-03`: Lưu bảng kê vào trạng thái `Chờ gửi`; bấm `Gửi duyệt` chuyển sang `Chưa duyệt` và hiện nút `Hủy gửi duyệt bảng kê`.
-- [x] `AC-04`: Trong màn chi tiết bảng kê, có thể rút/hủy từng danh bộ và xem tổng hợp vật tư sử dụng tại `/theodoilapbangke`.
+- [x] `AC-LBK-01`: Lọc `Định kỳ` sắp xếp đúng theo `Ngày kiểm định` tăng dần.
+- [x] `AC-LBK-02`: Chia bảng kê cho phép tối đa `300` dòng/BK và tự sinh mã `XXXXDK/26`.
+- [x] `AC-LBK-03`: Lưu bảng kê vào trạng thái `Chờ gửi`; bấm `Gửi duyệt` chuyển sang `Chưa duyệt` và hiện nút `Hủy gửi duyệt bảng kê`.
+- [x] `AC-LBK-04`: Trong màn chi tiết bảng kê, có thể rút/hủy từng danh bộ và xem tổng hợp vật tư sử dụng tại `/theodoilapbangke`.
 
 ---
 
@@ -102,4 +102,4 @@
 | Phiên bản | Ngày | Người chốt | Tóm tắt thay đổi |
 |---|---|---|---|
 | `v1.0` | 2026-11-17 | nhanlt | Chuyển thể từ SRS V1.4 mục `4.3`; gắn note lệch `FR-LBK-04` vs UI, thiếu công thức lọc & luồng sửa BK trả về |
-| `v1.1` | 2026-11-23 | nhanlt | Nâng giới hạn lên `300` dòng/BK (`DEC-05`); cập nhật bước `Chờ gửi` → `Gửi duyệt` / `Hủy gửi duyệt`, sắp xếp `Ngày KĐ` tăng dần, chức năng rút từng danh bộ và tách màn `/theodoilapbangke` |
+| `v1.1` | 2026-11-23 | nhanlt | Nâng giới hạn lên `300` dòng/BK (`DEC-02`); cập nhật bước `Chờ gửi` → `Gửi duyệt` / `Hủy gửi duyệt`, sắp xếp `Ngày KĐ` tăng dần, chức năng rút từng danh bộ và tách màn `/theodoilapbangke` |
